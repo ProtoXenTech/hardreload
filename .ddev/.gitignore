@@ -1,0 +1,5 @@
+# DDEV generated files
+/db_snapshots
+/.importdb*
+/.ssh*
+/.homeadditions*
