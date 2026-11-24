@@ -11,7 +11,7 @@
     <!-- Top Header -->
     <header class="flex items-center justify-between pb-3 border-b border-zinc-800">
       <div class="flex items-center gap-2">
-        <div class="flex items-center justify-center w-7 h-7 rounded-lg bg-indigo-600 text-white shadow-sm shadow-indigo-500/20">
+        <div class="relative flex items-center justify-center w-7 h-7 rounded-lg bg-indigo-600 text-white shadow-md shadow-indigo-500/25">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
             <path d="M3 3v5h5"/>
@@ -46,12 +46,15 @@
       </div>
     </header>
 
-    <!-- Active Tab Info Card -->
+    <!-- Active Tab Diagnostic HUD Card -->
     <div class="mt-3 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-between">
-      <div class="min-w-0 pr-2">
+      <div class="min-w-0 pr-2 flex-1">
         <div class="flex items-center gap-1.5">
           <span id="tab-protocol-badge" class="px-1.5 py-0.2 rounded text-[10px] font-semibold tracking-wider uppercase bg-emerald-950 text-emerald-400 border border-emerald-800/60">HTTPS</span>
           <span id="tab-domain" class="text-xs font-medium text-zinc-200 truncate">Loading tab...</span>
+          <button id="btn-copy-domain" title="Copy Origin URL" class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </button>
         </div>
         <div class="flex items-center gap-3 mt-1 text-[11px] text-zinc-400 tabular-nums">
           <span class="flex items-center gap-1">
@@ -176,7 +179,7 @@
       </label>
     </div>
 
-    <!-- Auto-Reload Section -->
+    <!-- Auto-Reload Section with Progress Bar -->
     <div class="mt-3 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800">
       <div class="flex items-center justify-between mb-2">
         <div class="flex items-center gap-1.5">
@@ -187,6 +190,11 @@
           <span class="text-xs font-medium text-zinc-200">Auto-Reload Loop</span>
         </div>
         <span id="ar-status-text" class="text-[10px] font-mono text-zinc-400">Idle</span>
+      </div>
+
+      <!-- Animated Progress Line -->
+      <div class="w-full h-1 bg-zinc-800 rounded-full overflow-hidden mb-2">
+        <div id="ar-progress-bar" class="h-full bg-indigo-500 rounded-full transition-all duration-300 w-0"></div>
       </div>
 
       <div class="flex items-center gap-1.5">
@@ -209,7 +217,7 @@
     </div>
 
     <!-- ProtoXen Publisher Footer -->
-    <footer class="mt-3 pt-2 border-t border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-400">
+    <footer class="mt-3 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-400">
       <div class="flex items-center gap-1.5">
         <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
         <span>By <a href="https://protoxen.com/" target="_blank" id="link-protoxen" class="font-semibold text-zinc-300 hover:text-indigo-400 transition-colors">ProtoXen</a></span>

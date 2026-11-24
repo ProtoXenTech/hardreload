@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HardReload+ — Precision Cache & Storage Buster for Chrome</title>
+  <title>HardReload+ — Precision Cache & Storage Buster by ProtoXen</title>
   <link rel="icon" type="image/png" href="/icons/icon32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500/20 selection:text-indigo-200">
+<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500/20 selection:text-indigo-200 min-h-screen">
   <!-- Top Announcement Navigation Bar -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/80 border-b border-zinc-800/80">
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/85 border-b border-zinc-850">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center gap-3">
-        <div class="flex items-center justify-center w-9 h-9 rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
+        <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
             <path d="M3 3v5h5"/>
@@ -26,8 +26,8 @@
         </div>
         <div class="flex items-center gap-2">
           <span class="text-base font-bold tracking-tight text-white">HardReload<span class="text-indigo-400">+</span></span>
-          <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-zinc-900 text-zinc-400 border border-zinc-800">MV3 Edition</span>
-          <a href="https://protoxen.com/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-900/80 hover:bg-zinc-850 text-zinc-400 hover:text-indigo-300 border border-zinc-800 transition-colors">
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-zinc-900 text-zinc-400 border border-zinc-800">MV3</span>
+          <a href="https://protoxen.com/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-900/90 hover:bg-zinc-850 text-zinc-400 hover:text-indigo-300 border border-zinc-800 transition-colors">
             <span>By</span>
             <span class="font-semibold text-zinc-200 hover:text-white">ProtoXen</span>
           </a>
@@ -37,13 +37,18 @@
       <!-- Navigation Links -->
       <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-zinc-400">
         <a href="#lab" class="hover:text-zinc-100 transition-colors">Testbench Lab</a>
-        <a href="#features" class="hover:text-zinc-100 transition-colors">Features</a>
-        <a href="#install" class="hover:text-zinc-100 transition-colors">Installation</a>
+        <a href="#comparison" class="hover:text-zinc-100 transition-colors">Why HardReload+</a>
+        <a href="#features" class="hover:text-zinc-100 transition-colors">Architecture</a>
+        <a href="#install" class="hover:text-zinc-100 transition-colors">Install Guide</a>
         <a href="#shortcuts" class="hover:text-zinc-100 transition-colors">Shortcuts</a>
       </nav>
 
       <!-- Right CTAs -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5">
+        <button id="nav-btn-copy-path" class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span id="nav-copy-text">Copy Unpacked Path</span>
+        </button>
         <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-xs font-semibold text-white shadow-sm shadow-indigo-600/30 transition-all">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -56,74 +61,162 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative pt-16 pb-20 overflow-hidden border-b border-zinc-900">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),rgba(255,255,255,0))]"></div>
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 mb-6">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>A Developer Tool by <a href="https://protoxen.com/" target="_blank" class="font-semibold text-white hover:text-indigo-400 underline underline-offset-2">ProtoXen</a></span>
-        <span class="text-zinc-600">&bull;</span>
-        <span class="font-medium text-zinc-400">Manifest V3 Compliant</span>
-      </div>
+  <!-- Hero Section with Live Extension Simulator -->
+  <section class="relative pt-12 pb-20 overflow-hidden border-b border-zinc-900">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-15%,rgba(99,102,241,0.18),rgba(255,255,255,0))]"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Column: Copy & CTAs -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          <!-- Agency Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>A Tool by <a href="https://protoxen.com/" target="_blank" class="font-semibold text-white hover:text-indigo-400 underline underline-offset-2">ProtoXen</a></span>
+            <span class="text-zinc-600">&bull;</span>
+            <span class="font-medium text-zinc-400">Chrome MV3 Ready</span>
+          </div>
 
-      <!-- Main Heading -->
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]">
-        The precision cache buster and storage cleaner for <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-300">modern web developers</span>.
-      </h1>
+          <!-- Main Heading -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+            Precision cache & storage buster for <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-300">modern web developers</span>.
+          </h1>
 
-      <p class="mt-6 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-        Bypass HTTP disk & memory cache, wipe stubborn service workers, purge partitioned origin datastores, and automate tab refreshing in one tactile click or keystroke.
-      </p>
+          <p class="mt-6 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Bypass HTTP memory & disk cache, unregister stubborn service workers, wipe partitioned origin datastores, and automate tab refreshing in one tactile click or global keystroke.
+          </p>
 
-      <!-- Action Buttons -->
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-          <span>Download HardReload+ (.zip)</span>
-        </a>
+          <!-- Action Buttons -->
+          <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+            <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download Extension (.zip)</span>
+            </a>
 
-        <a href="#lab" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-850 active:scale-[0.98] border border-zinc-800 hover:border-zinc-700 text-sm font-semibold text-zinc-200 hover:text-white transition-all">
-          <svg class="w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 2v7.31"/>
-            <path d="M14 9.3V1.99"/>
-            <path d="M8.5 2h7"/>
-            <path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>
-            <path d="M5.52 16h12.96"/>
-          </svg>
-          <span>Open Interactive Test Lab</span>
-        </a>
-      </div>
+            <a href="#lab" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-850 active:scale-[0.98] border border-zinc-800 hover:border-zinc-700 text-sm font-semibold text-zinc-200 hover:text-white transition-all">
+              <svg class="w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2v7.31"/>
+                <path d="M14 9.3V1.99"/>
+                <path d="M8.5 2h7"/>
+                <path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>
+                <path d="M5.52 16h12.96"/>
+              </svg>
+              <span>Open Testbench Lab</span>
+            </a>
+          </div>
 
-      <!-- Quick Metrics Strip -->
-      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-        <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 text-left">
-          <div class="text-[11px] font-medium text-zinc-400">Cache Partition Bypass</div>
-          <div class="text-xl font-bold text-white mt-1 font-mono tabular-nums">0 ms</div>
-          <div class="text-[10px] text-zinc-500 mt-0.5">Direct DevTools Protocol Bypass</div>
+          <!-- Quick Terminal Unpacked Load Snippet -->
+          <div class="mt-8 max-w-lg mx-auto lg:mx-0 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-left">
+            <div class="flex items-center justify-between text-xs text-zinc-400 mb-1.5 font-medium">
+              <span>Local Unpacked Path (Load in Chrome):</span>
+              <span id="hero-copy-status" class="text-emerald-400 text-[11px] font-mono hidden">Copied to clipboard</span>
+            </div>
+            <div class="flex items-center justify-between gap-2 p-2 rounded-lg bg-zinc-950 border border-zinc-800/80">
+              <code id="hero-unpacked-path" class="text-xs font-mono text-indigo-300 truncate">/home/sajol/Server/Tool/hardreload/extension</code>
+              <button id="btn-hero-copy-path" title="Copy Path" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-200 hover:text-white transition-colors shrink-0">
+                Copy
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 text-left">
-          <div class="text-[11px] font-medium text-zinc-400">Purge Scope</div>
-          <div class="text-xl font-bold text-white mt-1 font-mono">6 Layers</div>
-          <div class="text-[10px] text-zinc-500 mt-0.5">HTTP, SW, IDB, Local, Session, Cookies</div>
-        </div>
+        <!-- Right Column: Interactive Live Extension Simulator Mockup -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-sm rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl shadow-indigo-950/30 overflow-hidden relative">
+            <!-- Simulated Chrome Window Header -->
+            <div class="px-4 py-2.5 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+              </div>
+              <span class="text-[11px] font-mono text-zinc-400">Live Extension Simulator</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
 
-        <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 text-left">
-          <div class="text-[11px] font-medium text-zinc-400">Cache Killer Engine</div>
-          <div class="text-xl font-bold text-white mt-1 font-mono">DNR API</div>
-          <div class="text-[10px] text-zinc-500 mt-0.5">Dynamic DeclarativeNetRequest</div>
-        </div>
+            <!-- Simulated Popup Body -->
+            <div class="p-4 space-y-3">
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-md bg-indigo-600 text-white flex items-center justify-center">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-white">HardReload<span class="text-indigo-400">+</span></span>
+                </div>
+                <span class="text-[10px] font-mono text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800">ACTIVE TAB</span>
+              </div>
 
-        <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 text-left">
-          <div class="text-[11px] font-medium text-zinc-400">Shortcut Latency</div>
-          <div class="text-xl font-bold text-white mt-1 font-mono tabular-nums">&lt; 15 ms</div>
-          <div class="text-[10px] text-zinc-500 mt-0.5">Instant execution via Alt+Shift+R</div>
+              <!-- Host Info -->
+              <div class="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-between text-xs">
+                <div class="truncate pr-2">
+                  <div class="text-[10px] text-emerald-400 font-semibold font-mono">HTTPS &bull; ACTIVE HOST</div>
+                  <div class="text-zinc-200 font-medium truncate font-mono text-[11px]">hardreload.ddev.site</div>
+                </div>
+                <span id="sim-badge" class="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-300">READY</span>
+              </div>
+
+              <!-- Simulator Action Buttons (Clicking them triggers test lab!) -->
+              <div class="grid grid-cols-2 gap-2">
+                <button id="sim-hard-reload" class="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-indigo-500 text-left group transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span class="text-[9px] font-mono text-zinc-400">Alt+Shift+R</span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-white">Hard Reload</div>
+                  <div class="text-[9px] text-zinc-400">Bypass cache</div>
+                </button>
+
+                <button id="sim-empty-cache" class="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-cyan-500 text-left group transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+                    <span class="text-[9px] font-mono text-zinc-400">Alt+Shift+C</span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-white">Empty Cache</div>
+                  <div class="text-[9px] text-zinc-400">Flush origin cache</div>
+                </button>
+
+                <button id="sim-purge-storage" class="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-purple-500 text-left group transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <svg class="w-3.5 h-3.5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    <span class="text-[9px] font-mono text-zinc-400">Alt+Shift+D</span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-white">Purge Storage</div>
+                  <div class="text-[9px] text-zinc-400">Local & IDB wipe</div>
+                </button>
+
+                <button id="sim-clear-cookies" class="p-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-amber-500 text-left group transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="8" r="1.5" fill="currentColor"/></svg>
+                    <span class="text-[9px] font-mono text-zinc-400">Domain</span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-white">Clear Cookies</div>
+                  <div class="text-[9px] text-zinc-400">Drop session cookies</div>
+                </button>
+              </div>
+
+              <!-- Nuclear Purge Simulator Button -->
+              <button id="sim-nuclear" class="w-full p-2.5 rounded-lg bg-red-950/40 hover:bg-red-950/70 border border-red-900/50 hover:border-red-500 flex items-center justify-between text-left transition-all">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Nuclear Purge Simulation</div>
+                    <div class="text-[10px] text-zinc-400">Instant wipe of all 5 layers</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-red-300">WIPE ALL</span>
+              </button>
+
+              <!-- Simulator Status Toast -->
+              <div id="sim-feedback" class="p-2 rounded bg-indigo-950/70 border border-indigo-800/60 text-[11px] text-indigo-300 flex items-center justify-between">
+                <span>Click any simulated button above to test</span>
+                <span class="text-[10px] text-indigo-400 font-mono">LIVE</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -131,7 +224,7 @@
 
   <!-- Interactive Testbench Lab Section -->
   <section id="lab" class="py-16 border-b border-zinc-900 bg-zinc-950">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
           <div class="flex items-center gap-2 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-2">
@@ -140,20 +233,25 @@
           </div>
           <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Live Storage & Cache Inspection Lab</h2>
           <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl">
-            Simulate realistic client-side storage, cached HTTP assets, and service workers on this page. Then trigger HardReload+ and verify instant purging.
+            Simulate realistic client storage, cached HTTP assets, and service workers on this page. Then trigger HardReload+ and verify instant purging.
           </p>
         </div>
 
         <!-- Master Seed & Clear Controls -->
-        <div class="flex items-center gap-2.5">
-          <button id="btn-seed-all" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-indigo-600/90 hover:bg-indigo-600 text-white text-xs font-semibold shadow-sm shadow-indigo-600/20 active:scale-[0.98] transition-all">
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="btn-seed-all" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-indigo-600/90 hover:bg-indigo-600 text-white text-xs font-semibold shadow-sm shadow-indigo-600/20 active:scale-[0.98] transition-all">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             <span>Populate All 5 Layers</span>
           </button>
 
-          <button id="btn-clear-all-lab" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-medium active:scale-[0.98] transition-all">
+          <button id="btn-clear-all-lab" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-medium active:scale-[0.98] transition-all">
             <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
             <span>Clear Lab State</span>
+          </button>
+
+          <button id="btn-export-json" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-medium active:scale-[0.98] transition-all" title="Export State as JSON">
+            <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Export JSON</span>
           </button>
         </div>
       </div>
@@ -161,7 +259,7 @@
       <!-- Live Test Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 1. LocalStorage Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-local" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -175,8 +273,8 @@
               </div>
               <span id="lab-local-count" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-purple-400 tabular-nums">0 keys</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Persistent key-value entries across page sessions.</p>
-            <div id="lab-local-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Persistent key-value entries scoped to origin.</p>
+            <div id="lab-local-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Empty (Click Populate below)
             </div>
           </div>
@@ -187,7 +285,7 @@
         </div>
 
         <!-- 2. SessionStorage Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-session" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -201,8 +299,8 @@
               </div>
               <span id="lab-session-count" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-cyan-400 tabular-nums">0 keys</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Tab-bound temporary session records.</p>
-            <div id="lab-session-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Tab-bound temporary session records.</p>
+            <div id="lab-session-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Empty (Click Populate below)
             </div>
           </div>
@@ -213,7 +311,7 @@
         </div>
 
         <!-- 3. IndexedDB Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-idb" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -227,8 +325,8 @@
               </div>
               <span id="lab-idb-count" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-indigo-400 tabular-nums">0 records</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Structured client datastore for offline cache.</p>
-            <div id="lab-idb-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Structured client datastore for offline cache.</p>
+            <div id="lab-idb-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Database not initialized
             </div>
           </div>
@@ -239,7 +337,7 @@
         </div>
 
         <!-- 4. Service Worker Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-sw" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -253,8 +351,8 @@
               </div>
               <span id="lab-sw-status" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-zinc-400">Inactive</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Intercepts HTTP network requests & serves cached assets.</p>
-            <div id="lab-sw-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Intercepts HTTP network requests & serves cache.</p>
+            <div id="lab-sw-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               No worker controlling this scope
             </div>
           </div>
@@ -265,7 +363,7 @@
         </div>
 
         <!-- 5. Cookies Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-cookies" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -279,8 +377,8 @@
               </div>
               <span id="lab-cookie-count" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-amber-400 tabular-nums">0 cookies</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Session & persistent authorization tokens.</p>
-            <div id="lab-cookie-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Session & persistent authorization tokens.</p>
+            <div id="lab-cookie-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               No cookies found
             </div>
           </div>
@@ -291,7 +389,7 @@
         </div>
 
         <!-- 6. HTTP Cache Probe Card -->
-        <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-cache" class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center gap-2">
@@ -305,8 +403,8 @@
               </div>
               <span id="lab-cache-status" class="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-zinc-800 text-rose-400 tabular-nums">Idle</span>
             </div>
-            <p class="text-xs text-zinc-400 mb-4">Tests whether requests hit browser disk cache or fetch fresh.</p>
-            <div id="lab-cache-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-4">
+            <p class="text-xs text-zinc-400 mb-3">Tests browser disk/memory cache vs fresh fetch.</p>
+            <div id="lab-cache-preview" class="p-2.5 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Click Probe to benchmark response latency
             </div>
           </div>
@@ -319,14 +417,72 @@
     </div>
   </section>
 
+  <!-- Comparison Section -->
+  <section id="comparison" class="py-20 border-b border-zinc-900 bg-zinc-950">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Speed & Architecture</span>
+        <h2 class="text-3xl font-extrabold tracking-tight text-white mt-2">Why HardReload+ beats native Chrome reloading</h2>
+        <p class="mt-2 text-xs sm:text-sm text-zinc-400">Comparison across dev workflows and multi-domain environments.</p>
+      </div>
+
+      <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-zinc-900 border-b border-zinc-800 text-zinc-400">
+              <tr>
+                <th class="py-3.5 px-4 font-semibold text-zinc-300">Capability</th>
+                <th class="py-3.5 px-4 font-medium text-zinc-400">Native Normal (F5)</th>
+                <th class="py-3.5 px-4 font-medium text-zinc-400">DevTools Hard Reload</th>
+                <th class="py-3.5 px-4 font-semibold text-indigo-400">HardReload+ (ProtoXen)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-800 text-zinc-300">
+              <tr>
+                <td class="py-3.5 px-4 font-medium text-white">DevTools Required Open?</td>
+                <td class="py-3.5 px-4 text-zinc-400">No</td>
+                <td class="py-3.5 px-4 text-red-400 font-medium">Yes (Must be docked/open)</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold">No (Instant anytime)</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-medium text-white">Service Worker Purge</td>
+                <td class="py-3.5 px-4 text-zinc-400">No</td>
+                <td class="py-3.5 px-4 text-zinc-400">Manual in Application tab</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold">Automatic 1-Click</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-medium text-white">Subdomain Isolation Safeguard</td>
+                <td class="py-3.5 px-4 text-zinc-400">N/A</td>
+                <td class="py-3.5 px-4 text-zinc-400">N/A</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold">Strict (Never touches other domains)</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-medium text-white">Cache Killer Mode (DNR)</td>
+                <td class="py-3.5 px-4 text-zinc-400">No</td>
+                <td class="py-3.5 px-4 text-zinc-400">Only while DevTools open</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold">Persistent per host</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-medium text-white">Automated Tab Loop with Badge</td>
+                <td class="py-3.5 px-4 text-zinc-400">No</td>
+                <td class="py-3.5 px-4 text-zinc-400">No</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold">Alarm-backed Countdown</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section id="features" class="py-20 border-b border-zinc-900 bg-zinc-950">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Engine Architecture</span>
-        <h2 class="text-3xl font-extrabold tracking-tight text-white mt-2">Why HardReload+ outperforms native browser shortcuts</h2>
+        <h2 class="text-3xl font-extrabold tracking-tight text-white mt-2">Engineered for clean slate precision</h2>
         <p class="mt-3 text-sm text-zinc-400">
-          Chrome's native DevTools hard reload requires DevTools to be docked and open. HardReload+ provides instant, background-level purging with zero friction.
+          HardReload+ combines native Chrome Tabs protocol, DeclarativeNetRequest, and DOM-isolated scripting.
         </p>
       </div>
 
@@ -335,9 +491,9 @@
           <div class="w-10 h-10 rounded-xl bg-indigo-950/80 text-indigo-400 border border-indigo-800/50 flex items-center justify-center mb-4">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5"/><path d="M9.5 9.5h5"/></svg>
           </div>
-          <h3 class="text-base font-semibold text-white">Direct Tabs API Reload</h3>
+          <h3 class="text-base font-semibold text-white">Tabs API Bypass</h3>
           <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-            Uses the native <code class="text-zinc-300">chrome.tabs.reload(id, { bypassCache: true })</code> protocol to force byte-level network re-validation across all sub-resources and frames.
+            Forces network re-validation via native <code class="text-zinc-300">chrome.tabs.reload(id, { bypassCache: true })</code> across all sub-resources and frames.
           </p>
         </div>
 
@@ -345,9 +501,9 @@
           <div class="w-10 h-10 rounded-xl bg-cyan-950/80 text-cyan-400 border border-cyan-800/50 flex items-center justify-center mb-4">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
           </div>
-          <h3 class="text-base font-semibold text-white">BrowsingData Partition Wiper</h3>
+          <h3 class="text-base font-semibold text-white">Partitioned Wiper</h3>
           <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-            Surgically removes disk cache and memory cache scoped exclusively to the active tab's origin without nuking other unrelated open tabs.
+            Surgically removes cache and storage scoped exclusively to the active tab's origin without nuking other unrelated open tabs.
           </p>
         </div>
 
@@ -355,39 +511,9 @@
           <div class="w-10 h-10 rounded-xl bg-purple-950/80 text-purple-400 border border-purple-800/50 flex items-center justify-center mb-4">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
-          <h3 class="text-base font-semibold text-white">Full Client Storage Cleanup</h3>
+          <h3 class="text-base font-semibold text-white">Client Storage Eraser</h3>
           <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
             Injected execution script flushes window.localStorage, window.sessionStorage, unregisters active Service Workers, and deletes IndexedDB schema partitions.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors">
-          <div class="w-10 h-10 rounded-xl bg-red-950/80 text-red-400 border border-red-800/50 flex items-center justify-center mb-4">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-white">DeclarativeNetRequest Cache Killer</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-            Applies dynamic Manifest V3 rules that strip conditional headers (<code class="text-zinc-300">If-None-Match</code>) and injects <code class="text-zinc-300">Cache-Control: no-cache, no-store</code> on every outgoing request.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors">
-          <div class="w-10 h-10 rounded-xl bg-amber-950/80 text-amber-400 border border-amber-800/50 flex items-center justify-center mb-4">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-white">Automated Tab Reload Loop</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-            Chrome Alarm-backed countdown timer with real-time toolbar badge counter. Keeps dashboards, live logs, or test harnesses refreshed automatically.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors">
-          <div class="w-10 h-10 rounded-xl bg-emerald-950/80 text-emerald-400 border border-emerald-800/50 flex items-center justify-center mb-4">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <h3 class="text-base font-semibold text-white">Full Customization & Context Menu</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-            Context menus anywhere on the page for one-click right-click purging, plus deep preferences for click actions and granular purge toggles.
           </p>
         </div>
       </div>
@@ -409,7 +535,7 @@
           <div class="flex-1">
             <h3 class="text-sm font-semibold text-white">Download and Extract Extension Archive</h3>
             <p class="text-xs text-zinc-400 mt-1">Download the pre-packaged zip or use the <code class="text-zinc-300">extension/</code> folder directly from this repository.</p>
-            <div class="mt-3">
+            <div class="mt-3 flex items-center gap-2">
               <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white transition-colors">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 <span>Download hard-reload-plus.zip</span>
@@ -447,7 +573,7 @@
       </div>
 
       <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden divide-y divide-zinc-800">
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between hover:bg-zinc-850/50 transition-colors">
           <div>
             <div class="text-sm font-semibold text-white">Hard Reload Tab</div>
             <div class="text-xs text-zinc-400 mt-0.5">Bypasses browser memory & disk cache without clearing storage</div>
@@ -455,7 +581,7 @@
           <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + R</kbd>
         </div>
 
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between hover:bg-zinc-850/50 transition-colors">
           <div>
             <div class="text-sm font-semibold text-white">Empty Cache & Hard Reload</div>
             <div class="text-xs text-zinc-400 mt-0.5">Purges Chrome's HTTP cache partition for current origin then reloads</div>
@@ -463,7 +589,7 @@
           <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + C</kbd>
         </div>
 
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between hover:bg-zinc-850/50 transition-colors">
           <div>
             <div class="text-sm font-semibold text-white">Purge Storage & Reload</div>
             <div class="text-xs text-zinc-400 mt-0.5">Clears LocalStorage, SessionStorage, IndexedDB & unregisters Service Workers</div>
@@ -471,7 +597,7 @@
           <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + D</kbd>
         </div>
 
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between hover:bg-zinc-850/50 transition-colors">
           <div>
             <div class="text-sm font-semibold text-white">Toggle Cache Killer Mode</div>
             <div class="text-xs text-zinc-400 mt-0.5">Dynamically forces no-cache request headers on current domain</div>

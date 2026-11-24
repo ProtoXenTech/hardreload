@@ -1,6 +1,6 @@
 /**
  * HardReload+ (hard-reload-plus)
- * Popup Controller
+ * Popup Controller — Precision Cache & Storage Buster
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const storageStatEl = document.getElementById('storage-stat');
   const cacheKillerToggle = document.getElementById('toggle-cache-killer');
   const arStatusText = document.getElementById('ar-status-text');
+  const arProgressBar = document.getElementById('ar-progress-bar');
   const btnToggleAr = document.getElementById('btn-toggle-ar');
   const presetBtns = document.querySelectorAll('.ar-preset-btn');
   const toastEl = document.getElementById('popup-toast');
   const toastText = document.getElementById('toast-text');
+  const btnCopyDomain = document.getElementById('btn-copy-domain');
 
   // Query active tab
   try {
@@ -42,6 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       protocolBadge.textContent = 'HTTP';
       protocolBadge.className = 'px-1.5 py-0.2 rounded text-[10px] font-semibold tracking-wider uppercase bg-amber-950 text-amber-400 border border-amber-800/60';
     }
+
+    // Bind copy domain
+    btnCopyDomain?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(urlObj.origin);
+        showToast(`Copied ${urlObj.origin}`);
+        btnCopyDomain.innerHTML = '<svg class="w-3 h-3 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(() => {
+          btnCopyDomain.innerHTML = '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
+        }, 1500);
+      } catch (e) {}
+    });
 
     // Fetch tab info & metrics from background & content
     refreshTabDiagnostics(tab, urlObj);
@@ -68,14 +82,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (res.autoReload) {
           isAutoReloading = true;
           activeInterval = res.autoReload.interval;
-          arStatusText.textContent = `Running (${res.autoReload.remaining}s)`;
+          const remaining = res.autoReload.remaining;
+          arStatusText.textContent = `Running (${remaining}s)`;
           btnToggleAr.textContent = 'Stop';
           btnToggleAr.className = 'px-3 py-1 rounded text-xs font-medium bg-red-900 text-red-100 hover:bg-red-800 border border-red-700 transition-all';
+
+          // Update progress bar percentage
+          const percent = Math.max(0, Math.min(100, ((activeInterval - remaining) / activeInterval) * 100));
+          if (arProgressBar) arProgressBar.style.width = `${percent}%`;
         } else {
           isAutoReloading = false;
           arStatusText.textContent = 'Idle';
           btnToggleAr.textContent = 'Start';
           btnToggleAr.className = 'px-3 py-1 rounded text-xs font-medium bg-zinc-800 hover:bg-indigo-600 text-zinc-200 hover:text-white border border-zinc-700/60 hover:border-indigo-500 transition-all';
+          if (arProgressBar) arProgressBar.style.width = '0%';
         }
 
         updatePresetBtnStyles();
@@ -110,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     toastEl.classList.remove('hidden');
     setTimeout(() => {
       toastEl.classList.add('hidden');
-    }, 2000);
+    }, 2200);
   }
 
   // Execute Action Helper
@@ -138,28 +158,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Event Listeners for Actions
-  document.getElementById('btn-hard-reload').addEventListener('click', () => {
+  document.getElementById('btn-hard-reload')?.addEventListener('click', () => {
     triggerAction('hard', 'Hard Reload');
   });
 
-  document.getElementById('btn-empty-cache').addEventListener('click', () => {
+  document.getElementById('btn-empty-cache')?.addEventListener('click', () => {
     triggerAction('cache', 'Empty Cache');
   });
 
-  document.getElementById('btn-purge-storage').addEventListener('click', () => {
+  document.getElementById('btn-purge-storage')?.addEventListener('click', () => {
     triggerAction('storage', 'Purge Storage');
   });
 
-  document.getElementById('btn-clear-cookies').addEventListener('click', () => {
+  document.getElementById('btn-clear-cookies')?.addEventListener('click', () => {
     triggerAction('cookies', 'Clear Cookies');
   });
 
-  document.getElementById('btn-nuclear-purge').addEventListener('click', () => {
+  document.getElementById('btn-nuclear-purge')?.addEventListener('click', () => {
     triggerAction('nuclear', 'Nuclear Purge');
   });
 
   // Cache Killer Switch
-  cacheKillerToggle.addEventListener('change', () => {
+  cacheKillerToggle?.addEventListener('change', () => {
     if (!currentTab || !currentTab.id) return;
     const urlObj = new URL(currentTab.url);
 
@@ -182,7 +202,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       updatePresetBtnStyles();
 
       if (isAutoReloading && currentTab) {
-        // Restart with new interval
         chrome.runtime.sendMessage({
           type: 'SET_AUTO_RELOAD',
           tabId: currentTab.id,
@@ -208,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Toggle Auto-Reload
-  btnToggleAr.addEventListener('click', () => {
+  btnToggleAr?.addEventListener('click', () => {
     if (!currentTab || !currentTab.id) return;
 
     isAutoReloading = !isAutoReloading;
@@ -230,6 +249,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           arStatusText.textContent = 'Idle';
           btnToggleAr.textContent = 'Start';
           btnToggleAr.className = 'px-3 py-1 rounded text-xs font-medium bg-zinc-800 hover:bg-indigo-600 text-zinc-200 hover:text-white border border-zinc-700/60 hover:border-indigo-500 transition-all';
+          if (arProgressBar) arProgressBar.style.width = '0%';
           showToast('Auto-reload stopped');
         }
       }
@@ -237,11 +257,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // Top header icons
-  document.getElementById('btn-open-options').addEventListener('click', () => {
+  document.getElementById('btn-open-options')?.addEventListener('click', () => {
     chrome.runtime.openOptionsPage();
   });
 
-  document.getElementById('btn-open-lab').addEventListener('click', () => {
+  document.getElementById('btn-open-lab')?.addEventListener('click', () => {
     chrome.tabs.create({ url: 'https://hardreload.ddev.site' });
   });
 

@@ -1,10 +1,12 @@
 /**
  * HardReload+ (hard-reload-plus)
- * Interactive Diagnostic Lab Controller
+ * Diagnostic Lab & Live Interactive Simulator Controller
+ * Engineered by ProtoXen (https://protoxen.com/)
  */
 
 const DB_NAME = 'hard_reload_test_db';
 const STORE_NAME = 'users_cache';
+const UNPACKED_PATH = '/home/sajol/Server/Tool/hardreload/extension';
 
 // Elements
 const localCountEl = document.getElementById('lab-local-count');
@@ -19,6 +21,10 @@ const cookieCountEl = document.getElementById('lab-cookie-count');
 const cookiePreviewEl = document.getElementById('lab-cookie-preview');
 const cacheStatusEl = document.getElementById('lab-cache-status');
 const cachePreviewEl = document.getElementById('lab-cache-preview');
+
+// Simulator Elements
+const simBadge = document.getElementById('sim-badge');
+const simFeedback = document.getElementById('sim-feedback');
 
 // 1. LocalStorage Logic
 function updateLocalStorageView() {
@@ -44,11 +50,13 @@ function seedLocalStorage() {
   window.localStorage.setItem('flags_enabled', JSON.stringify({ cache_buster: true, ddev_proxy: true, instant_reload: true }));
   window.localStorage.setItem('last_checkpoint_timestamp', new Date().toISOString());
   updateLocalStorageView();
+  highlightCard('card-local');
 }
 
 function wipeLocalStorage() {
   window.localStorage.clear();
   updateLocalStorageView();
+  highlightCard('card-local', true);
 }
 
 // 2. SessionStorage Logic
@@ -75,11 +83,13 @@ function seedSessionStorage() {
   window.sessionStorage.setItem('temporary_csrf_nonce', '98fa2094ec8190');
   window.sessionStorage.setItem('draft_payload_cache', '{"status":"ready"}');
   updateSessionStorageView();
+  highlightCard('card-session');
 }
 
 function wipeSessionStorage() {
   window.sessionStorage.clear();
   updateSessionStorageView();
+  highlightCard('card-session', true);
 }
 
 // 3. IndexedDB Logic
@@ -152,6 +162,7 @@ async function seedIndexedDB() {
   tx.oncomplete = () => {
     db.close();
     updateIndexedDBView();
+    highlightCard('card-idb');
   };
 }
 
@@ -159,6 +170,7 @@ async function wipeIndexedDB() {
   const req = indexedDB.deleteDatabase(DB_NAME);
   req.onsuccess = () => {
     updateIndexedDBView();
+    highlightCard('card-idb', true);
   };
 }
 
@@ -187,6 +199,7 @@ async function registerServiceWorker() {
     try {
       await navigator.serviceWorker.register('/sw-test.js');
       await updateServiceWorkerView();
+      highlightCard('card-sw');
     } catch (e) {
       swPreviewEl.textContent = `Registration error: ${e.message}`;
     }
@@ -200,6 +213,7 @@ async function unregisterServiceWorker() {
       await r.unregister();
     }
     await updateServiceWorkerView();
+    highlightCard('card-sw', true);
   }
 }
 
@@ -240,6 +254,7 @@ function seedCookies() {
   document.cookie = `auth_verified=true; ${expires}; path=/; SameSite=Lax`;
   document.cookie = `preferred_theme=zinc_dark; ${expires}; path=/; SameSite=Lax`;
   updateCookiesView();
+  highlightCard('card-cookies');
 }
 
 function wipeCookies() {
@@ -248,6 +263,7 @@ function wipeCookies() {
     document.cookie = `${c.name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
   }
   updateCookiesView();
+  highlightCard('card-cookies', true);
 }
 
 // 6. HTTP Network Probe Logic
@@ -273,10 +289,21 @@ async function probeCachedAsset(bust = false) {
       <div class="truncate text-zinc-400 mt-1">Resource: ${escapeHtml(url)}</div>
       <div class="text-[10px] text-zinc-500 mt-0.5">Content-Type: ${type}</div>
     `;
+    highlightCard('card-cache');
   } catch (err) {
     cacheStatusEl.textContent = 'Failed';
     cachePreviewEl.textContent = `Fetch error: ${err.message}`;
   }
+}
+
+// Visual Card Highlight
+function highlightCard(cardId, isWipe = false) {
+  const el = document.getElementById(cardId);
+  if (!el) return;
+  el.classList.add(isWipe ? 'border-red-500/80' : 'border-indigo-500/80', 'bg-zinc-850/80');
+  setTimeout(() => {
+    el.classList.remove('border-red-500/80', 'border-indigo-500/80', 'bg-zinc-850/80');
+  }, 800);
 }
 
 // Helper: Escape HTML
@@ -300,6 +327,7 @@ function seedAll() {
   registerServiceWorker();
   seedCookies();
   probeCachedAsset(false);
+  showSimFeedback('Populated all 5 diagnostic layers with test data');
 }
 
 function clearAll() {
@@ -310,6 +338,65 @@ function clearAll() {
   wipeCookies();
   cacheStatusEl.textContent = 'Idle';
   cachePreviewEl.innerHTML = 'All client state cleared';
+  showSimFeedback('Cleared all client storage layers');
+}
+
+// Export State as JSON
+function exportStateAsJson() {
+  const state = {
+    generatedAt: new Date().toISOString(),
+    publisher: 'ProtoXen (https://protoxen.com/)',
+    origin: window.location.origin,
+    localStorage: { ...window.localStorage },
+    sessionStorage: { ...window.sessionStorage },
+    cookies: parseCookies(),
+  };
+
+  const jsonStr = JSON.stringify(state, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `hardreload-diagnostic-${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showSimFeedback('Diagnostic state JSON exported');
+}
+
+// Simulator Trigger Feedback
+function showSimFeedback(text, badge = 'ACTION') {
+  if (simFeedback) simFeedback.innerHTML = `<span>${text}</span><span class="text-[10px] text-indigo-400 font-mono">${badge}</span>`;
+  if (simBadge) {
+    simBadge.textContent = badge;
+    simBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-900 text-indigo-200 border border-indigo-700';
+    setTimeout(() => {
+      simBadge.textContent = 'READY';
+      simBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-300';
+    }, 1500);
+  }
+}
+
+// Copy Unpacked Path Helpers
+function setupClipboardCopy(buttonId, statusId, textToCopy) {
+  const btn = document.getElementById(buttonId);
+  const statusEl = statusId ? document.getElementById(statusId) : null;
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="text-emerald-400 font-semibold">Copied!</span>';
+      if (statusEl) statusEl.classList.remove('hidden');
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        if (statusEl) statusEl.classList.add('hidden');
+      }, 2000);
+    } catch (err) {
+      console.error('Clipboard copy failed:', err);
+    }
+  });
 }
 
 // Setup Event Listeners
@@ -321,10 +408,12 @@ document.addEventListener('DOMContentLoaded', () => {
   updateServiceWorkerView();
   updateCookiesView();
 
-  // Buttons
+  // Master Lab Buttons
   document.getElementById('btn-seed-all')?.addEventListener('click', seedAll);
   document.getElementById('btn-clear-all-lab')?.addEventListener('click', clearAll);
+  document.getElementById('btn-export-json')?.addEventListener('click', exportStateAsJson);
 
+  // Individual Card Buttons
   document.getElementById('btn-seed-local')?.addEventListener('click', seedLocalStorage);
   document.getElementById('btn-wipe-local')?.addEventListener('click', wipeLocalStorage);
 
@@ -342,6 +431,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-probe-cache')?.addEventListener('click', () => probeCachedAsset(false));
   document.getElementById('btn-bust-cache')?.addEventListener('click', () => probeCachedAsset(true));
+
+  // Copy Buttons
+  setupClipboardCopy('btn-hero-copy-path', 'hero-copy-status', UNPACKED_PATH);
+  setupClipboardCopy('nav-btn-copy-path', null, UNPACKED_PATH);
+
+  // Interactive Live Extension Simulator Buttons
+  document.getElementById('sim-hard-reload')?.addEventListener('click', () => {
+    probeCachedAsset(false);
+    showSimFeedback('Hard Reload simulated (Network revalidation)', 'RELOAD');
+  });
+
+  document.getElementById('sim-empty-cache')?.addEventListener('click', () => {
+    probeCachedAsset(true);
+    showSimFeedback('Empty Cache simulated (Origin cache cleared)', 'CACHE');
+  });
+
+  document.getElementById('sim-purge-storage')?.addEventListener('click', () => {
+    wipeLocalStorage();
+    wipeSessionStorage();
+    wipeIndexedDB();
+    unregisterServiceWorker();
+    showSimFeedback('Purge Storage simulated (Local/Session/IDB/SW cleared)', 'WIPED');
+  });
+
+  document.getElementById('sim-clear-cookies')?.addEventListener('click', () => {
+    wipeCookies();
+    showSimFeedback('Clear Cookies simulated (Domain session cookies dropped)', 'COOKIE');
+  });
+
+  document.getElementById('sim-nuclear')?.addEventListener('click', () => {
+    clearAll();
+    showSimFeedback('Nuclear Purge simulated (All storage layers wiped)', 'NUCLEAR');
+  });
 
   // Storage listener for cross-tab or extension wiping detection
   window.addEventListener('storage', () => {
