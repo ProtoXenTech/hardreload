@@ -32,3 +32,44 @@
     background: #3f3f46;
   }
 }
+
+/* SaaS Ambient Grid Background */
+.saas-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
+}
+
+/* Subtle SaaS Card Highlight */
+.saas-card {
+  position: relative;
+  background-color: rgba(18, 18, 21, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saas-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+/* Glowing Border Beam for Featured Hero Console */
+.hero-glow-border {
+  position: relative;
+}
+.hero-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom, rgba(99, 102, 241, 0.5), rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}

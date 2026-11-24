@@ -387,6 +387,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Setup HUD Simulator Buttons
+  const setHudStatus = (text, isSuccess = true) => {
+    const label = document.getElementById('sim-status-label');
+    if (!label) return;
+    label.textContent = text;
+    label.className = isSuccess ? 'text-emerald-400 font-semibold' : 'text-zinc-300';
+    setTimeout(() => {
+      label.textContent = 'READY';
+      label.className = '';
+    }, 1800);
+  };
+
+  document.getElementById('sim-btn-hard')?.addEventListener('click', () => {
+    probeCachedAsset(false);
+    setHudStatus('HARD RELOAD: 12ms');
+  });
+
+  document.getElementById('sim-btn-cache')?.addEventListener('click', () => {
+    probeCachedAsset(true);
+    setHudStatus('CACHE CLEARED: 18ms');
+  });
+
+  document.getElementById('sim-btn-storage')?.addEventListener('click', () => {
+    wipeLocalStorage();
+    wipeSessionStorage();
+    wipeIndexedDB();
+    unregisterServiceWorker();
+    setHudStatus('STORAGE PURGED: 24ms');
+  });
+
+  document.getElementById('sim-btn-nuclear')?.addEventListener('click', () => {
+    clearAll();
+    setHudStatus('NUCLEAR RESET: 32ms');
+  });
+
   // Storage listener for cross-tab or extension wiping detection
   window.addEventListener('storage', () => {
     updateLocalStorageView();

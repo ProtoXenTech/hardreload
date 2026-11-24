@@ -7,16 +7,21 @@
   <link rel="icon" type="image/png" href="/icons/icon32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500/20 selection:text-indigo-200 min-h-screen">
+<body class="bg-[#09090b] text-zinc-100 antialiased selection:bg-indigo-500/25 selection:text-indigo-200 min-h-screen relative overflow-x-hidden">
+
+  <!-- SaaS Ambient Glow & Grid -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-indigo-600/15 via-indigo-900/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
+  <div class="absolute inset-0 saas-grid-bg pointer-events-none -z-10 h-[850px]"></div>
+
   <!-- Navigation Bar -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/90 border-b border-zinc-800/80">
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#09090b]/80 border-b border-white/[0.06]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- Brand -->
       <div class="flex items-center gap-3">
-        <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600 text-white shadow-sm">
+        <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
             <path d="M3 3v5h5"/>
@@ -25,113 +30,305 @@
           </svg>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-sm font-semibold tracking-tight text-white">HardReload<span class="text-indigo-400">+</span></span>
+          <span class="text-sm font-bold tracking-tight text-white">HardReload<span class="text-indigo-400">+</span></span>
           <span class="text-zinc-600">/</span>
-          <a href="https://protoxen.com/" target="_blank" class="text-xs text-zinc-400 hover:text-zinc-200 transition-colors">ProtoXen</a>
+          <a href="https://protoxen.com/" target="_blank" class="text-xs text-zinc-400 hover:text-white font-medium transition-colors">ProtoXen</a>
         </div>
       </div>
 
       <!-- Links -->
       <nav class="hidden md:flex items-center gap-6 text-xs text-zinc-400">
-        <a href="#lab" class="hover:text-zinc-200 transition-colors">Diagnostic Console</a>
-        <a href="#features" class="hover:text-zinc-200 transition-colors">Architecture</a>
-        <a href="#comparison" class="hover:text-zinc-200 transition-colors">Comparison</a>
-        <a href="#install" class="hover:text-zinc-200 transition-colors">Installation</a>
-        <a href="#shortcuts" class="hover:text-zinc-200 transition-colors">Shortcuts</a>
+        <a href="#hero-preview" class="hover:text-zinc-100 transition-colors">Command HUD</a>
+        <a href="#lab" class="hover:text-zinc-100 transition-colors">Diagnostic Studio</a>
+        <a href="#bento" class="hover:text-zinc-100 transition-colors">Capabilities</a>
+        <a href="#comparison" class="hover:text-zinc-100 transition-colors">Comparison</a>
+        <a href="#shortcuts" class="hover:text-zinc-100 transition-colors">Shortcuts</a>
       </nav>
 
       <!-- Right Action -->
-      <div class="flex items-center gap-2.5">
-        <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-xs font-medium text-white transition-all">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
+      <div class="flex items-center gap-3">
+        <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white hover:bg-zinc-200 active:scale-[0.98] text-xs font-semibold text-zinc-950 shadow-sm transition-all">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Download .zip</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section (Calm, Clutter-Free, Balanced Whitespace) -->
-  <section class="py-20 sm:py-28 border-b border-zinc-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <!-- Quiet context label -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-        <span>Chrome Manifest V3 · Origin-Isolated Buster</span>
+  <!-- Eye-Catching SaaS Hero Section -->
+  <section class="pt-16 sm:pt-24 pb-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <!-- Announcement Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-900/90 border border-white/10 text-xs text-zinc-300 mb-8 backdrop-blur-md shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+        <span class="font-medium">HardReload+ 1.0 for Chrome</span>
+        <span class="text-zinc-600">&bull;</span>
+        <a href="https://protoxen.com/" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">By ProtoXen &rarr;</a>
       </div>
 
-      <!-- Main Headline: Clean, Solid Off-White, No AI Gradient Shouts -->
-      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-        Hard reload active tabs without opening DevTools.
+      <!-- Main Headline: Modern SaaS Gradient Typography -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
+        Hard reload active tabs.
+        <span class="block bg-gradient-to-b from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mt-1">
+          DevTools not required.
+        </span>
       </h1>
 
       <!-- Specific Subhead -->
-      <p class="mt-5 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-        Bypasses HTTP cache, unregisters active service workers, and purges origin-scoped storage in one keystroke. Guaranteed never to touch other domains or sibling subdomains.
+      <p class="mt-6 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+        Bypass HTTP memory & disk cache, unregister stubborn service workers, and purge origin storage with a single tactile shortcut. Built with strict subdomain isolation so your main sessions stay safe.
       </p>
 
       <!-- Primary CTAs -->
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-xs font-semibold text-white shadow-sm transition-all">
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 active:scale-[0.98] text-xs font-semibold text-zinc-950 shadow-lg shadow-white/10 transition-all">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Download HardReload+ (.zip)</span>
-          <span class="text-[10px] text-indigo-200 font-mono pl-1">80 KB</span>
+          <span class="text-[10px] text-zinc-500 font-mono pl-1 border-l border-zinc-300 ml-0.5">80 KB</span>
         </a>
 
-        <a href="#lab" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 active:scale-[0.98] border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-200 hover:text-white transition-all">
+        <a href="#lab" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 active:scale-[0.98] border border-white/10 hover:border-white/20 text-xs font-medium text-zinc-200 hover:text-white transition-all backdrop-blur-md">
           <svg class="w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>
-          <span>Open Diagnostic Console</span>
+          <span>Open Diagnostic Studio</span>
         </a>
       </div>
 
-      <!-- Quick Unpacked Path Bar -->
-      <div class="mt-10 max-w-xl mx-auto p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-left flex items-center justify-between gap-3">
-        <div class="min-w-0 flex-1 pl-1">
-          <div class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Local Unpacked Folder</div>
-          <code id="hero-unpacked-path" class="text-xs font-mono text-zinc-300 truncate block mt-0.5">/home/sajol/Server/Tool/hardreload/extension</code>
+      <!-- Quick Command Bar -->
+      <div class="mt-8 max-w-xl mx-auto p-2 rounded-xl bg-zinc-900/80 border border-white/[0.08] backdrop-blur-md flex items-center justify-between gap-3 text-left">
+        <div class="min-w-0 flex-1 pl-2">
+          <div class="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold font-mono">Unpacked Folder</div>
+          <code id="hero-unpacked-path" class="text-xs font-mono text-indigo-300 truncate block mt-0.5">/home/sajol/Server/Tool/hardreload/extension</code>
         </div>
         <button id="btn-hero-copy-path" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 hover:text-white transition-colors shrink-0">
           Copy Path
         </button>
       </div>
+
+      <!-- HERO CENTERPIECE: Modern SaaS Developer HUD Preview -->
+      <div id="hero-preview" class="mt-14 max-w-4xl mx-auto rounded-2xl hero-glow-border bg-[#0d0d10] p-1.5 shadow-2xl shadow-indigo-950/40">
+        <div class="rounded-xl bg-[#121216] border border-white/[0.08] overflow-hidden">
+          <!-- Window Header / Title Bar -->
+          <div class="px-4 py-3 bg-[#16161c] border-b border-white/[0.06] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            </div>
+
+            <!-- Chrome Address Bar Pill -->
+            <div class="flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900/90 border border-white/[0.06] text-xs font-mono text-zinc-300 w-full max-w-md justify-between">
+              <div class="flex items-center gap-1.5 truncate">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span class="text-emerald-400">https://</span>
+                <span class="truncate">hardreload.ddev.site</span>
+              </div>
+              <span class="text-[10px] text-zinc-400 font-sans">Tab #1 · Active</span>
+            </div>
+
+            <!-- Telemetry Pill -->
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 rounded">0ms Overhaul</span>
+            </div>
+          </div>
+
+          <!-- Interactive Command HUD Body -->
+          <div class="p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between pb-6 border-b border-white/[0.06] gap-4">
+              <div class="text-left">
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-white tracking-tight">Extension Command HUD</h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">INTERACTIVE PREVIEW</span>
+                </div>
+                <p class="text-xs text-zinc-400 mt-0.5">Click any hotkey action below to trigger live network revalidation & storage clearing.</p>
+              </div>
+
+              <!-- Status HUD Badge -->
+              <div id="sim-hud-status" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/[0.08] text-xs font-mono text-zinc-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span id="sim-status-label">READY</span>
+              </div>
+            </div>
+
+            <!-- 4 Interactive SaaS Command Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 mt-6 text-left">
+              <!-- Action 1 -->
+              <button id="sim-btn-hard" class="saas-card p-4 rounded-xl group text-left transition-all">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                  </div>
+                  <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300 border border-zinc-700">Alt+Shift+R</kbd>
+                </div>
+                <div class="text-xs font-semibold text-white">Hard Reload</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Bypasses browser cache</div>
+              </button>
+
+              <!-- Action 2 -->
+              <button id="sim-btn-cache" class="saas-card p-4 rounded-xl group text-left transition-all">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+                  </div>
+                  <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300 border border-zinc-700">Alt+Shift+C</kbd>
+                </div>
+                <div class="text-xs font-semibold text-white">Empty Cache</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Purges origin cache</div>
+              </button>
+
+              <!-- Action 3 -->
+              <button id="sim-btn-storage" class="saas-card p-4 rounded-xl group text-left transition-all">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                  </div>
+                  <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300 border border-zinc-700">Alt+Shift+D</kbd>
+                </div>
+                <div class="text-xs font-semibold text-white">Purge Storage</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">Wipes Local & IDB</div>
+              </button>
+
+              <!-- Action 4 -->
+              <button id="sim-btn-nuclear" class="saas-card p-4 rounded-xl group text-left transition-all">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  </div>
+                  <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300 border border-zinc-700">Wipe All</kbd>
+                </div>
+                <div class="text-xs font-semibold text-white">Nuclear Reset</div>
+                <div class="text-[11px] text-zinc-400 mt-0.5">All 5 layers wiped</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Diagnostic Console (The Core Craft Moment) -->
-  <section id="lab" class="py-16 border-b border-zinc-900 bg-zinc-950">
+  <!-- SaaS Bento Grid: Architecture & Capabilities -->
+  <section id="bento" class="py-20 border-b border-white/[0.06] bg-[#0c0c0f]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Engineered for Developers</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-2">Built for high-frequency dev cycles</h2>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-2">How HardReload+ gives you immediate clean-slate testing without opening DevTools.</p>
+      </div>
+
+      <!-- Bento Grid (Asymmetric High SaaS Cards) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Card 1: Wide 2-Columns Bento -->
+        <div class="md:col-span-2 saas-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5"/></svg>
+              </span>
+              <h3 class="text-base font-bold text-white">Direct Tabs API Protocol Revalidation</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-xl">
+              Unlike normal browser refresh (which serves 304 Not Modified from disk cache), HardReload+ leverages <code class="text-indigo-300 font-mono">chrome.tabs.reload(id, { bypassCache: true })</code>. This instructs Chrome's network process to completely bypass memory and disk caches across all stylesheets, scripts, and iframes.
+            </p>
+          </div>
+
+          <!-- Visual Code snippet in Bento -->
+          <div class="mt-6 p-3 rounded-xl bg-zinc-950/80 border border-white/[0.06] font-mono text-xs text-zinc-300">
+            <span class="text-zinc-500">// Native Manifest V3 bypass invocation</span><br>
+            <span class="text-indigo-400">await</span> chrome.tabs.<span class="text-sky-300">reload</span>(activeTab.id, { <span class="text-emerald-400">bypassCache</span>: <span class="text-amber-400">true</span> });
+          </div>
+        </div>
+
+        <!-- Card 2: 1-Column Bento -->
+        <div class="saas-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+              </span>
+              <h3 class="text-base font-bold text-white">Subdomain Isolation</h3>
+            </div>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Strict host-only cookie and storage filtering. Wiping <code class="text-zinc-300 font-mono">sub.example.com</code> will never invalidate sessions or cookies on <code class="text-zinc-300 font-mono">example.com</code>.
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-emerald-400">
+            ✓ Host-Only Origin Enforced
+          </div>
+        </div>
+
+        <!-- Card 3: 1-Column Bento -->
+        <div class="saas-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="p-2 rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
+              <h3 class="text-base font-bold text-white">DNR Cache Killer</h3>
+            </div>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Manifest V3 dynamic rules match exact <code class="text-zinc-300 font-mono">requestDomains</code>, stripping <code class="text-zinc-300 font-mono">If-None-Match</code> and injecting <code class="text-zinc-300 font-mono">no-cache</code> headers on every request.
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-rose-400">
+            Header: Cache-Control: no-cache
+          </div>
+        </div>
+
+        <!-- Card 4: Wide 2-Columns Bento -->
+        <div class="md:col-span-2 saas-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <h3 class="text-base font-bold text-white">Automated Tab Reload Loop with Live Badge</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-xl">
+              Equipped with background Chrome Alarms. Keep testing dashboards or live server logs refreshed automatically every 5s, 10s, 30s, or 60s with a real-time countdown badge directly on the toolbar icon.
+            </p>
+          </div>
+
+          <div class="mt-6 flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-white/[0.08] text-xs font-mono text-zinc-300">Presets: 5s / 10s / 30s / 60s</span>
+            <span class="px-2.5 py-1 rounded-md bg-amber-950/80 border border-amber-800/60 text-xs font-mono text-amber-300">Badge Countdown: Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagnostic Studio (The Interactive Console) -->
+  <section id="lab" class="py-20 border-b border-white/[0.06] bg-[#09090b]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <h2 class="text-xl font-bold tracking-tight text-white">Live Diagnostic Console</h2>
-          <p class="text-xs text-zinc-400 mt-1">Real-time simulation and inspection of all 5 browser storage layers for this origin.</p>
+          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Real-Time Studio</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">Live Diagnostic Console</h2>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-1">Simulate and inspect all 5 client storage layers for this origin.</p>
         </div>
 
         <!-- Master Actions -->
         <div class="flex items-center gap-2">
-          <button id="btn-seed-all" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-medium text-white transition-all">
+          <button id="btn-seed-all" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white shadow-sm transition-all active:scale-[0.98]">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             <span>Populate All</span>
           </button>
-          <button id="btn-clear-all-lab" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-medium transition-all">
+          <button id="btn-clear-all-lab" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-all active:scale-[0.98]">
             <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
             <span>Clear All</span>
           </button>
-          <button id="btn-export-json" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-medium transition-all">
+          <button id="btn-export-json" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-all active:scale-[0.98]">
             <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>Export JSON</span>
           </button>
         </div>
       </div>
 
-      <!-- Top Origin Banner -->
-      <div class="mb-6 p-3 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <!-- Origin HUD Status Bar -->
+      <div class="mb-6 p-3.5 rounded-xl saas-card flex flex-wrap items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-3">
-          <span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-emerald-950 text-emerald-400 border border-emerald-900">HTTPS</span>
-          <span class="text-zinc-200 font-mono" id="active-console-host">hardreload.ddev.site</span>
+          <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">HTTPS</span>
+          <span class="text-zinc-200 font-mono font-medium" id="active-console-host">hardreload.ddev.site</span>
           <span class="text-zinc-600">|</span>
           <span class="text-zinc-400">Subdomain Isolation: <strong class="text-emerald-400 font-normal">Active</strong></span>
         </div>
@@ -142,249 +339,186 @@
         </div>
       </div>
 
-      <!-- Unified Inspector Grid (6 Calm Layers) -->
+      <!-- Inspector Grid: 6 Distinct SaaS Storage Panels -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 1. LocalStorage -->
-        <div id="card-local" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-local" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h10"/></svg>
+                <svg class="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h10"/></svg>
                 <span class="text-xs font-semibold text-white">LocalStorage</span>
               </div>
               <span id="lab-local-count" class="text-xs font-mono text-zinc-400 tabular-nums">0 keys</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5">Persistent origin key-value pairs.</p>
-            <div id="lab-local-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-local-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Empty
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-seed-local" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Seed</button>
-            <button id="btn-wipe-local" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Wipe</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-seed-local" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Seed 5 Keys</button>
+            <button id="btn-wipe-local" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Wipe</button>
           </div>
         </div>
 
         <!-- 2. SessionStorage -->
-        <div id="card-session" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-session" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 <span class="text-xs font-semibold text-white">SessionStorage</span>
               </div>
               <span id="lab-session-count" class="text-xs font-mono text-zinc-400 tabular-nums">0 keys</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5">Active tab-bound temporary keys.</p>
-            <div id="lab-session-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-session-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Empty
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-seed-session" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Seed</button>
-            <button id="btn-wipe-session" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Wipe</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-seed-session" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Seed 5 Keys</button>
+            <button id="btn-wipe-session" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Wipe</button>
           </div>
         </div>
 
         <!-- 3. IndexedDB -->
-        <div id="card-idb" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-idb" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                <svg class="w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                 <span class="text-xs font-semibold text-white">IndexedDB</span>
               </div>
               <span id="lab-idb-count" class="text-xs font-mono text-zinc-400 tabular-nums">0 records</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5"><code class="text-zinc-300 font-mono">hard_reload_test_db</code></p>
-            <div id="lab-idb-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-idb-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Uninitialized
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-seed-idb" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Seed 5 Rows</button>
-            <button id="btn-wipe-idb" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Drop</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-seed-idb" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Seed 5 Rows</button>
+            <button id="btn-wipe-idb" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Drop</button>
           </div>
         </div>
 
         <!-- 4. Service Worker -->
-        <div id="card-sw" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-sw" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 <span class="text-xs font-semibold text-white">Service Worker</span>
               </div>
               <span id="lab-sw-status" class="text-xs font-mono text-zinc-400">Inactive</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5"><code class="text-zinc-300 font-mono">sw-test.js</code> cache interceptor.</p>
-            <div id="lab-sw-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-sw-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Not registered
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-register-sw" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Register SW</button>
-            <button id="btn-unregister-sw" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Unregister</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-register-sw" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Register SW</button>
+            <button id="btn-unregister-sw" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Unregister</button>
           </div>
         </div>
 
         <!-- 5. Domain Cookies -->
-        <div id="card-cookies" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-cookies" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="8" r="1.5" fill="currentColor"/></svg>
+                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="8" r="1.5" fill="currentColor"/></svg>
                 <span class="text-xs font-semibold text-white">Domain Cookies</span>
               </div>
               <span id="lab-cookie-count" class="text-xs font-mono text-zinc-400 tabular-nums">0 cookies</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5">Exact host-only cookies.</p>
-            <div id="lab-cookie-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-cookie-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               No cookies
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-seed-cookies" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Set Cookies</button>
-            <button id="btn-wipe-cookies" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Drop</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-seed-cookies" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Set Cookies</button>
+            <button id="btn-wipe-cookies" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-red-950/60 text-zinc-400 hover:text-red-400 text-xs transition-colors">Drop</button>
           </div>
         </div>
 
         <!-- 6. HTTP Network Cache Probe -->
-        <div id="card-cache" class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col justify-between">
+        <div id="card-cache" class="saas-card p-4 rounded-xl flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/[0.06] mb-3">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                <svg class="w-4 h-4 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                 <span class="text-xs font-semibold text-white">HTTP Cache Probe</span>
               </div>
               <span id="lab-cache-status" class="text-xs font-mono text-zinc-400 tabular-nums">Idle</span>
             </div>
             <p class="text-[11px] text-zinc-400 mb-2.5">Checks browser memory & disk cache response.</p>
-            <div id="lab-cache-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-zinc-850 text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
+            <div id="lab-cache-preview" class="p-2.5 rounded-lg bg-zinc-950 border border-white/[0.06] text-[11px] font-mono text-zinc-400 min-h-16 max-h-24 overflow-y-auto mb-3">
               Ready to probe
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
-            <button id="btn-probe-cache" class="flex-1 py-1 px-2 rounded-md bg-zinc-800 hover:bg-zinc-750 text-xs font-medium text-zinc-200 transition-colors">Probe</button>
-            <button id="btn-bust-cache" class="py-1 px-2.5 rounded-md bg-zinc-850 hover:bg-zinc-750 text-zinc-400 hover:text-zinc-200 text-xs transition-colors">Bust Query</button>
+          <div class="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+            <button id="btn-probe-cache" class="flex-1 py-1.5 px-2 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 transition-colors">Probe Asset</button>
+            <button id="btn-bust-cache" class="py-1.5 px-3 rounded-md bg-zinc-850 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200 text-xs transition-colors">Bust Query</button>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Architecture & Features (Quiet, Structured) -->
-  <section id="features" class="py-16 border-b border-zinc-900 bg-zinc-950">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-10">
-        <h2 class="text-xl font-bold tracking-tight text-white">Engine Architecture</h2>
-        <p class="text-xs text-zinc-400 mt-1">Four targeted mechanisms built specifically for modern browser environments.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Feature 1 -->
-        <div class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="p-1.5 rounded-md bg-zinc-800 text-zinc-300">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-            </span>
-            <h3 class="text-sm font-semibold text-white">Protocol-Level Cache Bypass</h3>
-          </div>
-          <p class="text-xs text-zinc-400 leading-relaxed">
-            Uses native <code class="text-zinc-300 font-mono">chrome.tabs.reload(id, { bypassCache: true })</code>. Forces byte-level revalidation of HTML, scripts, stylesheets, and iframe resources directly in Chrome's network process.
-          </p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="p-1.5 rounded-md bg-zinc-800 text-zinc-300">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
-            </span>
-            <h3 class="text-sm font-semibold text-white">Surgical Storage & Service Worker Purge</h3>
-          </div>
-          <p class="text-xs text-zinc-400 leading-relaxed">
-            Combines in-frame script execution and <code class="text-zinc-300 font-mono">browsingData.remove({ origins: [origin] })</code>. Wipes localStorage, sessionStorage, IndexedDB, and unregisters active service workers without affecting other open tabs.
-          </p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="p-1.5 rounded-md bg-zinc-800 text-zinc-300">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-            </span>
-            <h3 class="text-sm font-semibold text-white">Strict Subdomain Separation</h3>
-          </div>
-          <p class="text-xs text-zinc-400 leading-relaxed">
-            Cookies and storage on <code class="text-zinc-300 font-mono">sub.example.com</code> and <code class="text-zinc-300 font-mono">example.com</code> are treated as separate partitions. Purging one domain will never log you out of the parent domain or sibling hosts.
-          </p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="p-1.5 rounded-md bg-zinc-800 text-zinc-300">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </span>
-            <h3 class="text-sm font-semibold text-white">DeclarativeNetRequest Cache Killer</h3>
-          </div>
-          <p class="text-xs text-zinc-400 leading-relaxed">
-            Manifest V3 dynamic rules matching exact <code class="text-zinc-300 font-mono">requestDomains</code>. Automatically removes <code class="text-zinc-300 font-mono">If-None-Match</code> and injects <code class="text-zinc-300 font-mono">no-cache, no-store</code> on all outbound requests.
-          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Comparison Matrix -->
-  <section id="comparison" class="py-16 border-b border-zinc-900 bg-zinc-950">
+  <section id="comparison" class="py-20 border-b border-white/[0.06] bg-[#0c0c0f]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-8 text-center sm:text-left">
-        <h2 class="text-xl font-bold tracking-tight text-white">Feature Comparison</h2>
-        <p class="text-xs text-zinc-400 mt-1">How HardReload+ compares to standard browser reloads.</p>
+      <div class="mb-10 text-center sm:text-left">
+        <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Architecture & Speed</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">Feature Comparison</h2>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1">How HardReload+ outperforms default browser reloads.</p>
       </div>
 
-      <div class="rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden">
+      <div class="rounded-xl border border-white/[0.08] bg-[#121216] overflow-hidden">
         <table class="w-full text-left text-xs">
-          <thead class="bg-zinc-850/60 border-b border-zinc-800 text-zinc-400">
+          <thead class="bg-[#16161c] border-b border-white/[0.08] text-zinc-400">
             <tr>
-              <th class="py-3 px-4 font-medium text-zinc-300">Capability</th>
-              <th class="py-3 px-4 font-normal text-zinc-400">F5 Normal</th>
-              <th class="py-3 px-4 font-normal text-zinc-400">DevTools Hard Reload</th>
-              <th class="py-3 px-4 font-medium text-indigo-400">HardReload+</th>
+              <th class="py-3.5 px-4 font-semibold text-zinc-200">Capability</th>
+              <th class="py-3.5 px-4 font-normal text-zinc-400">F5 Normal</th>
+              <th class="py-3.5 px-4 font-normal text-zinc-400">DevTools Hard Reload</th>
+              <th class="py-3.5 px-4 font-semibold text-indigo-400">HardReload+ (ProtoXen)</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-zinc-800/80 text-zinc-300">
+          <tbody class="divide-y divide-white/[0.06] text-zinc-300">
             <tr>
-              <td class="py-3 px-4 text-white">DevTools Must Be Open</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-zinc-400">Yes</td>
-              <td class="py-3 px-4 text-emerald-400 font-medium">No (Anytime)</td>
+              <td class="py-3.5 px-4 text-white font-medium">DevTools Must Be Open</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-red-400 font-medium">Yes (Must be docked)</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">No (Anytime shortcut)</td>
             </tr>
             <tr>
-              <td class="py-3 px-4 text-white">Purges Service Workers</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-zinc-500">No (Manual)</td>
-              <td class="py-3 px-4 text-emerald-400 font-medium">Automatic 1-Click</td>
+              <td class="py-3.5 px-4 text-white font-medium">Purges Service Workers</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-zinc-500">No (Manual)</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">Automatic 1-Click</td>
             </tr>
             <tr>
-              <td class="py-3 px-4 text-white">Subdomain Isolation Safeguard</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-emerald-400 font-medium">Guaranteed</td>
+              <td class="py-3.5 px-4 text-white font-medium">Subdomain Isolation Safeguard</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">Guaranteed Host-Only</td>
             </tr>
             <tr>
-              <td class="py-3 px-4 text-white">Cache Killer (DNR Rules)</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-emerald-400 font-medium">Persistent per host</td>
+              <td class="py-3.5 px-4 text-white font-medium">Cache Killer (DNR Rules)</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">Persistent per host</td>
             </tr>
             <tr>
-              <td class="py-3 px-4 text-white">Tab Loop with Badge Countdown</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-zinc-500">No</td>
-              <td class="py-3 px-4 text-emerald-400 font-medium">Built-in (5s-60s)</td>
+              <td class="py-3.5 px-4 text-white font-medium">Tab Loop with Badge Countdown</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-zinc-500">No</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">Built-in (5s to 60s)</td>
             </tr>
           </tbody>
         </table>
@@ -392,87 +526,46 @@
     </div>
   </section>
 
-  <!-- Installation Guide -->
-  <section id="install" class="py-16 border-b border-zinc-900 bg-zinc-950">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-8 text-center sm:text-left">
-        <h2 class="text-xl font-bold tracking-tight text-white">Installation Guide</h2>
-        <p class="text-xs text-zinc-400 mt-1">Load the unpacked extension in Chrome, Edge, or Brave in under 30 seconds.</p>
-      </div>
-
-      <div class="space-y-3">
-        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-start gap-3.5">
-          <span class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-300 font-mono text-xs flex items-center justify-center shrink-0">1</span>
-          <div>
-            <h3 class="text-xs font-semibold text-white">Download or Locate Extension Folder</h3>
-            <p class="text-xs text-zinc-400 mt-0.5">Use the local directory in this repository or download the pre-packaged archive.</p>
-            <div class="mt-2.5">
-              <a href="/downloads/hard-reload-plus.zip" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-white transition-colors">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span>Download hard-reload-plus.zip</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-start gap-3.5">
-          <span class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-300 font-mono text-xs flex items-center justify-center shrink-0">2</span>
-          <div>
-            <h3 class="text-xs font-semibold text-white">Enable Developer Mode</h3>
-            <p class="text-xs text-zinc-400 mt-0.5">Navigate to <code class="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-[11px]">chrome://extensions</code> in your address bar and switch on the Developer mode toggle.</p>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-start gap-3.5">
-          <span class="w-6 h-6 rounded-md bg-zinc-800 text-zinc-300 font-mono text-xs flex items-center justify-center shrink-0">3</span>
-          <div>
-            <h3 class="text-xs font-semibold text-white">Click "Load unpacked"</h3>
-            <p class="text-xs text-zinc-400 mt-0.5">Select the directory <code class="text-zinc-300 font-mono">/home/sajol/Server/Tool/hardreload/extension</code>. The HardReload+ icon will appear in your toolbar.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Shortcuts Section -->
-  <section id="shortcuts" class="py-16 border-b border-zinc-900 bg-zinc-950">
+  <section id="shortcuts" class="py-20 border-b border-white/[0.06] bg-[#09090b]">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-8 text-center sm:text-left">
-        <h2 class="text-xl font-bold tracking-tight text-white">Keyboard Shortcuts</h2>
-        <p class="text-xs text-zinc-400 mt-1">Configurable anytime in <code class="font-mono text-zinc-300">chrome://extensions/shortcuts</code>.</p>
+      <div class="mb-10 text-center sm:text-left">
+        <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Instant Execution</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">Keyboard Shortcuts</h2>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1">Customizable anytime in <code class="font-mono text-zinc-300">chrome://extensions/shortcuts</code>.</p>
       </div>
 
-      <div class="rounded-xl border border-zinc-800 bg-zinc-900 divide-y divide-zinc-800/80">
-        <div class="p-3.5 flex items-center justify-between">
-          <span class="text-xs text-zinc-200">Hard Reload Tab (Bypass cache)</span>
-          <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700">Alt + Shift + R</kbd>
+      <div class="rounded-xl border border-white/[0.08] bg-[#121216] divide-y divide-white/[0.06]">
+        <div class="p-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+          <span class="text-xs font-medium text-zinc-200">Hard Reload Tab (Bypass cache)</span>
+          <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + R</kbd>
         </div>
-        <div class="p-3.5 flex items-center justify-between">
-          <span class="text-xs text-zinc-200">Empty Cache & Hard Reload</span>
-          <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700">Alt + Shift + C</kbd>
+        <div class="p-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+          <span class="text-xs font-medium text-zinc-200">Empty Cache & Hard Reload</span>
+          <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + C</kbd>
         </div>
-        <div class="p-3.5 flex items-center justify-between">
-          <span class="text-xs text-zinc-200">Purge Storage & Reload</span>
-          <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700">Alt + Shift + D</kbd>
+        <div class="p-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+          <span class="text-xs font-medium text-zinc-200">Purge Storage & Reload</span>
+          <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + D</kbd>
         </div>
-        <div class="p-3.5 flex items-center justify-between">
-          <span class="text-xs text-zinc-200">Toggle Cache Killer Mode</span>
-          <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700">Alt + Shift + K</kbd>
+        <div class="p-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+          <span class="text-xs font-medium text-zinc-200">Toggle Cache Killer Mode</span>
+          <kbd class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-mono text-xs border border-zinc-700 shadow-inner">Alt + Shift + K</kbd>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-10 bg-zinc-950 text-xs text-zinc-500">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer class="py-12 bg-[#09090b] text-xs text-zinc-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-2">
-        <span class="font-semibold text-zinc-300">HardReload<span class="text-indigo-400">+</span></span>
-        <span>&bull;</span>
-        <span>Published by <a href="https://protoxen.com/" target="_blank" class="text-zinc-300 hover:text-indigo-400 font-medium transition-colors">ProtoXen</a></span>
+        <span class="font-bold text-zinc-200">HardReload<span class="text-indigo-400">+</span></span>
+        <span class="text-zinc-600">&bull;</span>
+        <span>Engineered & Published by <a href="https://protoxen.com/" target="_blank" class="text-zinc-300 hover:text-indigo-400 font-semibold transition-colors">ProtoXen</a></span>
       </div>
       <div class="flex items-center gap-4 text-zinc-400 font-mono">
-        <a href="https://protoxen.com/" target="_blank" class="hover:text-zinc-200 transition-colors">protoxen.com</a>
+        <a href="https://protoxen.com/" target="_blank" class="hover:text-white transition-colors">https://protoxen.com/</a>
         <span class="text-zinc-700">|</span>
         <span>hardreload.ddev.site</span>
       </div>
