@@ -2,6 +2,7 @@
 
 > **Visible Name**: HardReload+  
 > **Slug & Codebase**: `hard-reload-plus`  
+> **Author & Publisher**: [ProtoXen](https://protoxen.com/)  
 > **Category**: Tool  
 > **Target**: Chrome / Chromium-based Extension (Manifest V3)  
 > **Local Testbench & Showcase**: [https://hardreload.ddev.site](https://hardreload.ddev.site)  
@@ -11,7 +12,7 @@
 
 ## Overview
 
-**HardReload+** is an advanced, tactile Chrome extension designed for web developers, QA engineers, and power users. Unlike Chrome's default hard reload (which requires DevTools to be docked and open), HardReload+ allows one-click and global shortcut triggering of byte-level cache bypassing, deep storage purging, service worker unregistration, and dynamic header overrides.
+**HardReload+** is an advanced, tactile Chrome extension designed and published by **[ProtoXen](https://protoxen.com/)** for web developers, QA engineers, and agency teams. Unlike Chrome's default hard reload (which requires DevTools to be docked and open), HardReload+ allows one-click and global shortcut triggering of byte-level cache bypassing, deep storage purging, service worker unregistration, and dynamic header overrides.
 
 ---
 

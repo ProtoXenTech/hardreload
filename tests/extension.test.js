@@ -20,6 +20,8 @@ describe('HardReload+ (hard-reload-plus) Extension Validation', () => {
     assert.strictEqual(manifest.short_name, 'HardReload+');
     assert.strictEqual(manifest.version, '1.0.0');
     assert.ok(manifest.description.length > 20, 'Description should be descriptive');
+    assert.strictEqual(manifest.author, 'ProtoXen', 'Author must be ProtoXen');
+    assert.strictEqual(manifest.homepage_url, 'https://protoxen.com/', 'Homepage URL must point to ProtoXen');
   });
 
   test('Required Manifest V3 permissions', () => {

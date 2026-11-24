@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "HardReload+ — High-performance Chrome extension for precision hard reloading, deep cache clearing, storage cleanup, and tab automation.",
   "type": "module",
+  "author": {
+    "name": "ProtoXen",
+    "url": "https://protoxen.com/"
+  },
+  "publisher": "ProtoXen",
+  "homepage": "https://protoxen.com/",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "node scripts/package-extension.js && vite build",
@@ -16,9 +22,9 @@
     "cache-buster",
     "storage-cleaner",
     "service-worker-purge",
-    "developer-tool"
+    "developer-tool",
+    "protoxen"
   ],
-  "author": "hard-reload-plus",
   "license": "MIT",
   "dependencies": {
     "lucide": "^1.78.0"
