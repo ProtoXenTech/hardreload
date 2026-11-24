@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "HardReload+ — Smart Cache & Storage Buster",
+  "short_name": "HardReload+",
+  "version": "1.0.0",
+  "description": "Precision hard reload, cache clearing, service worker purge, storage buster, and automated tab reloading.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_title": "HardReload+"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "browsingData",
+    "storage",
+    "cookies",
+    "scripting",
+    "activeTab",
+    "contextMenus",
+    "alarms",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "commands": {
+    "hard-reload-tab": {
+      "suggested_key": {
+        "default": "Alt+Shift+R",
+        "mac": "Alt+Shift+R"
+      },
+      "description": "Hard reload tab (bypass cache)"
+    },
+    "empty-cache-reload": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Empty cache & hard reload active tab"
+    },
+    "purge-storage-reload": {
+      "suggested_key": {
+        "default": "Alt+Shift+D",
+        "mac": "Alt+Shift+D"
+      },
+      "description": "Purge storage & reload tab"
+    },
+    "toggle-cache-killer": {
+      "suggested_key": {
+        "default": "Alt+Shift+K",
+        "mac": "Alt+Shift+K"
+      },
+      "description": "Toggle Cache Killer mode for active domain"
+    }
+  }
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HardReload+ Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500/30">
+  <div class="max-w-2xl mx-auto px-6 py-10">
+    <!-- Header -->
+    <header class="flex items-center justify-between pb-6 border-b border-zinc-800">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-500/20">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+            <path d="M12 7v5"/>
+            <path d="M9.5 9.5h5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold tracking-tight text-white">HardReload<span class="text-indigo-400">+</span> Preferences</h1>
+            <span class="text-[11px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">v1.0.0</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">Configure reload behavior, deep purge targets, and cache overrides</p>
+        </div>
+      </div>
+      <a href="https://hardreload.ddev.site" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-xs text-zinc-300 hover:text-white border border-zinc-700/60 transition-colors">
+        <svg class="w-3.5 h-3.5 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span>Testbench Lab</span>
+      </a>
+    </header>
+
+    <!-- Main Settings Form -->
+    <main class="mt-8 space-y-8">
+      <!-- Section 1: Icon Action -->
+      <section class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
+        <h2 class="text-sm font-semibold text-zinc-100 uppercase tracking-wider mb-1">Extension Icon Click Action</h2>
+        <p class="text-xs text-zinc-400 mb-4">Choose what happens when you click the HardReload+ extension icon in the Chrome toolbar.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <label class="relative flex flex-col p-3 rounded-lg border border-zinc-700/70 bg-zinc-800/40 hover:bg-zinc-800 cursor-pointer transition-colors">
+            <input type="radio" name="primaryAction" value="popup" checked class="sr-only radio-action">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-white">Open Popup</span>
+              <span class="w-3.5 h-3.5 rounded-full border border-zinc-500 indicator"></span>
+            </div>
+            <span class="text-[11px] text-zinc-400">Shows the complete control panel with all reload and purge tools.</span>
+          </label>
+
+          <label class="relative flex flex-col p-3 rounded-lg border border-zinc-700/70 bg-zinc-800/40 hover:bg-zinc-800 cursor-pointer transition-colors">
+            <input type="radio" name="primaryAction" value="hard" class="sr-only radio-action">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-white">Direct Hard Reload</span>
+              <span class="w-3.5 h-3.5 rounded-full border border-zinc-500 indicator"></span>
+            </div>
+            <span class="text-[11px] text-zinc-400">Immediately forces a hard reload bypassing HTTP cache without opening menu.</span>
+          </label>
+
+          <label class="relative flex flex-col p-3 rounded-lg border border-zinc-700/70 bg-zinc-800/40 hover:bg-zinc-800 cursor-pointer transition-colors">
+            <input type="radio" name="primaryAction" value="cache" class="sr-only radio-action">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-white">Direct Empty Cache</span>
+              <span class="w-3.5 h-3.5 rounded-full border border-zinc-500 indicator"></span>
+            </div>
+            <span class="text-[11px] text-zinc-400">Clears origin cache partition and hard reloads immediately in one click.</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section 2: Deep Purge Targets -->
+      <section class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
+        <h2 class="text-sm font-semibold text-zinc-100 uppercase tracking-wider mb-1">Deep Purge Scope</h2>
+        <p class="text-xs text-zinc-400 mb-4">Select which storage and cache layers are removed during deep purge operations.</p>
+
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-cache" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">HTTP Browser Cache</span>
+              <p class="text-[10px] text-zinc-400">Disk & memory cache partitions</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-sw" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">Service Workers</span>
+              <p class="text-[10px] text-zinc-400">Unregisters background workers</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-local" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">LocalStorage</span>
+              <p class="text-[10px] text-zinc-400">Client key-value persistent storage</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-session" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">SessionStorage</span>
+              <p class="text-[10px] text-zinc-400">Active tab session key-values</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-idb" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">IndexedDB Databases</span>
+              <p class="text-[10px] text-zinc-400">Client-side document datastores</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-cachestorage" checked class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">CacheStorage API</span>
+              <p class="text-[10px] text-zinc-400">SW cache storage entries</p>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 cursor-pointer">
+            <input type="checkbox" id="purge-cookies" class="rounded border-zinc-600 bg-zinc-700 text-indigo-600">
+            <div>
+              <span class="font-medium text-zinc-200">Domain Cookies</span>
+              <p class="text-[10px] text-amber-400">Will sign you out of active session</p>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section 3: Cache Killer Domains -->
+      <section class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
+        <h2 class="text-sm font-semibold text-zinc-100 uppercase tracking-wider mb-1">Cache Killer Domain Rules</h2>
+        <p class="text-xs text-zinc-400 mb-4">Domains listed here will always have browser caching completely stripped on every request.</p>
+
+        <div class="flex items-center gap-2 mb-3">
+          <input type="text" id="input-domain" placeholder="e.g. hardreload.ddev.site or localhost" class="flex-1 px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500">
+          <button id="btn-add-domain" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-medium text-white transition-colors">Add Rule</button>
+        </div>
+
+        <div id="killer-domains-list" class="space-y-1.5 max-h-48 overflow-y-auto">
+          <!-- Dynamically populated -->
+          <div class="text-xs text-zinc-500 italic p-2">No domains configured. Toggle from popup or add domain above.</div>
+        </div>
+      </section>
+
+      <!-- Section 4: Keyboard Shortcuts Reference -->
+      <section class="p-5 rounded-xl bg-zinc-900 border border-zinc-800">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="text-sm font-semibold text-zinc-100 uppercase tracking-wider">Keyboard Shortcuts</h2>
+            <p class="text-xs text-zinc-400">Trigger any reload mode with instant global shortcuts.</p>
+          </div>
+          <button id="btn-custom-shortcuts" class="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Customize in Chrome</button>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center justify-between py-1.5 border-b border-zinc-800">
+            <span class="text-zinc-300">Hard Reload Tab (Bypass cache)</span>
+            <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700 font-mono text-[11px]">Alt+Shift+R</kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5 border-b border-zinc-800">
+            <span class="text-zinc-300">Empty Cache & Hard Reload</span>
+            <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700 font-mono text-[11px]">Alt+Shift+C</kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5 border-b border-zinc-800">
+            <span class="text-zinc-300">Purge Storage & Reload</span>
+            <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700 font-mono text-[11px]">Alt+Shift+D</kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5">
+            <span class="text-zinc-300">Toggle Cache Killer Mode</span>
+            <kbd class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700 font-mono text-[11px]">Alt+Shift+K</kbd>
+          </div>
+        </div>
+      </section>
+
+      <!-- Save & Status Bar -->
+      <div class="flex items-center justify-between pt-4">
+        <div id="save-status" class="text-xs text-emerald-400 hidden">
+          Preferences saved successfully.
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+          <button id="btn-reset-defaults" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-300 hover:text-white transition-colors">Reset Defaults</button>
+          <button id="btn-save-settings" class="px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white shadow-sm shadow-indigo-600/30 transition-colors">Save Preferences</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

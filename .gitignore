@@ -31,10 +31,19 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+.serena/
 
 # DDEV & local overrides
 .ddev/db_snapshots/
 .ddev/.importdb*
+.ddev/.*
+.ddev/*
+!.ddev/config.yaml
+!.ddev/.gitignore
+!.ddev/nginx_full/
+!.ddev/nginx_full/nginx-site.conf
+.ddev/nginx_full/README.nginx_full.txt
+.ddev/nginx_full/seconddocroot.conf.example
 
 # Office PM Cache
 _office/.office-cache.json

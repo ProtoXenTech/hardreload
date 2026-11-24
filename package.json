@@ -1,0 +1,32 @@
+{
+  "name": "hard-reload-plus",
+  "version": "1.0.0",
+  "description": "HardReload+ — High-performance Chrome extension for precision hard reloading, deep cache clearing, storage cleanup, and tab automation.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "node scripts/package-extension.js && vite build",
+    "build:extension": "node scripts/package-extension.js",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "hard-reload",
+    "chrome-extension",
+    "cache-buster",
+    "storage-cleaner",
+    "service-worker-purge",
+    "developer-tool"
+  ],
+  "author": "hard-reload-plus",
+  "license": "MIT",
+  "dependencies": {
+    "lucide": "^1.78.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "jszip": "^3.10.2",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8"
+  }
+}
