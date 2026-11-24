@@ -99,4 +99,38 @@ describe('HardReload+ (hard-reload-plus) Extension Validation', () => {
       assert.ok(zip.file(file), `ZIP archive missing expected file: ${file}`);
     }
   });
+
+  test('Subdomain and domain isolation filter logic', () => {
+    const mockCookies = [
+      { domain: 'sub.example.com', name: 'sub_only' },
+      { domain: '.sub.example.com', name: 'sub_dot' },
+      { domain: 'example.com', name: 'root_only' },
+      { domain: '.example.com', name: 'root_dot' },
+      { domain: 'api.other.org', name: 'unrelated' },
+    ];
+
+    function filterCookiesForTarget(cookies, targetHostname) {
+      const activeHost = targetHostname.toLowerCase();
+      return cookies.filter((c) => {
+        const cleanDomain = c.domain.replace(/^\./, '').toLowerCase();
+        return cleanDomain === activeHost;
+      });
+    }
+
+    // When purging sub.example.com
+    const subTargetCookies = filterCookiesForTarget(mockCookies, 'sub.example.com');
+    assert.strictEqual(subTargetCookies.length, 2);
+    assert.deepStrictEqual(
+      subTargetCookies.map((c) => c.name),
+      ['sub_only', 'sub_dot']
+    );
+
+    // When purging example.com
+    const rootTargetCookies = filterCookiesForTarget(mockCookies, 'example.com');
+    assert.strictEqual(rootTargetCookies.length, 2);
+    assert.deepStrictEqual(
+      rootTargetCookies.map((c) => c.name),
+      ['root_only', 'root_dot']
+    );
+  });
 });

@@ -201,25 +201,23 @@ async function performHardReload(tabId) {
   return { success: true, action: 'hard' };
 }
 
-// 2. Empty Cache & Reload
+// 2. Empty Cache & Reload (Strictly scoped to active origin, never global)
 async function performEmptyCacheReload(tabId, origin) {
   flashBadge(tabId, 'CACHE', '#06b6d4');
 
   try {
-    // Clear browsing cache scoped to origin
+    // Clear browsing cache & storage scoped strictly to this specific origin
     if (origin && origin.startsWith('http')) {
       await chrome.browsingData.remove(
         { origins: [origin] },
-        { cache: true, cacheStorage: true }
+        { cacheStorage: true, serviceWorkers: true }
       );
-    } else {
-      await chrome.browsingData.removeCache({});
     }
   } catch (e) {
-    // Fallback if origin filtering not supported
-    await chrome.browsingData.removeCache({});
+    // Never fall back to global removeCache!
   }
 
+  // Force byte-level cache bypass for this active tab only
   await chrome.tabs.reload(tabId, { bypassCache: true });
   return { success: true, action: 'cache' };
 }
@@ -306,23 +304,31 @@ async function performPurgeStorageReload(tabId, origin) {
   return { success: true, action: 'storage' };
 }
 
-// 4. Clear Cookies & Reload
+// 4. Clear Cookies & Reload (Strictly scoped to active hostname/subdomain)
 async function performClearCookiesReload(tabId, url) {
   flashBadge(tabId, 'COOKIE', '#f97316');
 
   try {
     const urlObj = new URL(url);
-    const domain = urlObj.hostname;
-    const cookies = await chrome.cookies.getAll({ domain });
+    const activeHost = urlObj.hostname.toLowerCase();
+    
+    // Fetch cookies visible to this tab's URL
+    const cookies = await chrome.cookies.getAll({ url });
 
     for (const cookie of cookies) {
-      const protocol = cookie.secure ? 'https:' : 'http:';
-      const cookieUrl = `${protocol}//${cookie.domain.replace(/^\./, '')}${cookie.path}`;
-      await chrome.cookies.remove({
-        url: cookieUrl,
-        name: cookie.name,
-        storeId: cookie.storeId,
-      });
+      const cleanCookieDomain = cookie.domain.replace(/^\./, '').toLowerCase();
+      // Strict subdomain separation:
+      // Only remove if the cookie specifically belongs to this exact subdomain/host.
+      // Example: If on "sub.example.com", ignore cookies belonging to "example.com" or "other.example.com"
+      if (cleanCookieDomain === activeHost) {
+        const protocol = cookie.secure ? 'https:' : 'http:';
+        const cookieUrl = `${protocol}//${cleanCookieDomain}${cookie.path}`;
+        await chrome.cookies.remove({
+          url: cookieUrl,
+          name: cookie.name,
+          storeId: cookie.storeId,
+        });
+      }
     }
   } catch (e) {}
 
@@ -404,7 +410,7 @@ async function toggleCacheKiller(tabId, hostname) {
         ],
       },
       condition: {
-        urlFilter: `||${hostname}^`,
+        requestDomains: [hostname],
         resourceTypes: [
           'main_frame',
           'sub_frame',
@@ -518,8 +524,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
         let cookieCount = 0;
         try {
-          const cookies = await chrome.cookies.getAll({ domain: hostname });
-          cookieCount = cookies.length;
+          const cookies = await chrome.cookies.getAll({ url });
+          const activeHost = hostname.toLowerCase();
+          cookieCount = cookies.filter(
+            (c) => c.domain.replace(/^\./, '').toLowerCase() === activeHost
+          ).length;
         } catch (e) {}
 
         return {
