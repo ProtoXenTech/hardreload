@@ -232,7 +232,7 @@ async function showInPageToast(tabId, title, detail) {
 // 1. Hard Reload Tab
 async function performHardReload(tabId) {
   flashBadge(tabId, 'RELOAD', '#4f46e5');
-  showInPageToast(tabId, 'Hard Reload', 'Bypassed memory and disk HTTP cache');
+  showInPageToast(tabId, 'Hard Reload', 'Bypassed memory and disk HTTP cache').catch(() => {});
   await chrome.tabs.reload(tabId, { bypassCache: true });
   return { success: true, action: 'hard' };
 }
@@ -240,7 +240,7 @@ async function performHardReload(tabId) {
 // 2. Empty Cache & Reload (Strictly scoped to active origin, never global)
 async function performEmptyCacheReload(tabId, origin) {
   flashBadge(tabId, 'CACHE', '#06b6d4');
-  showInPageToast(tabId, 'Cache Cleared', `Origin cache purged: ${origin || 'active domain'}`);
+  showInPageToast(tabId, 'Cache Cleared', `Origin cache purged: ${origin || 'active domain'}`).catch(() => {});
 
   try {
     // Clear browsing cache & storage scoped strictly to this specific origin
@@ -255,9 +255,6 @@ async function performEmptyCacheReload(tabId, origin) {
   }
 
   // Force byte-level cache bypass for this active tab only
-  await chrome.tabs.reload(tabId, { bypassCache: true });
-  return { success: true, action: 'cache' };
-}
   await chrome.tabs.reload(tabId, { bypassCache: true });
   return { success: true, action: 'cache' };
 }

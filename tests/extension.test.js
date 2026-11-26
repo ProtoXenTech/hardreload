@@ -67,6 +67,24 @@ describe('HardReload+ (hard-reload-plus) Extension Validation', () => {
     assert.strictEqual(commands['toggle-cache-killer'].suggested_key.default, 'Alt+Shift+K');
   });
 
+  test('All extension and source JavaScript files have valid syntax', () => {
+    const jsFiles = [
+      path.join(extensionDir, 'background.js'),
+      path.join(extensionDir, 'content.js'),
+      path.join(extensionDir, 'popup.js'),
+      path.join(extensionDir, 'options.js'),
+      path.join(rootDir, 'src/main.js'),
+    ];
+
+    for (const file of jsFiles) {
+      assert.ok(fs.existsSync(file), `File missing: ${file}`);
+      const code = fs.readFileSync(file, 'utf8');
+      assert.doesNotThrow(() => {
+        new Function(code);
+      }, `Syntax check failed for ${path.basename(file)}`);
+    }
+  });
+
   test('Background service worker implements robust tab querying for shortcuts', () => {
     const bgCode = fs.readFileSync(path.join(extensionDir, 'background.js'), 'utf8');
     assert.ok(bgCode.includes('lastFocusedWindow: true'), 'Must query lastFocusedWindow for MV3 command support');

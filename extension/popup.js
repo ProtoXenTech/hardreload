@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Query active tab
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab) {
+      [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    }
     currentTab = tab;
 
     if (!tab || !tab.url || tab.url.startsWith('chrome://')) {
@@ -135,7 +138,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Execute Action Helper
   async function triggerAction(actionName, label) {
-    if (!currentTab || !currentTab.id) return;
+    if (!currentTab || !currentTab.id) {
+      let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (!tab) {
+        [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      }
+      currentTab = tab;
+      if (!currentTab || !currentTab.id) {
+        showToast('No active tab');
+        return;
+      }
+    }
 
     const startTime = performance.now();
     const urlObj = new URL(currentTab.url);
@@ -149,6 +162,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         url: currentTab.url,
       },
       (res) => {
+        if (chrome.runtime.lastError) {
+          showToast(`Error: ${chrome.runtime.lastError.message}`);
+          return;
+        }
         const elapsed = Math.round(performance.now() - startTime);
         showToast(`${label} done in ${elapsed}ms`);
         // Refresh local stats
