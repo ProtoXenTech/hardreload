@@ -91,12 +91,35 @@ describe('HardReload+ (hard-reload-plus) Extension Validation', () => {
     assert.ok(bgCode.includes('SHORTCUT_TRIGGERED'), 'Must handle in-page shortcut triggers');
   });
 
-  test('Content script implements in-page keyboard event fallback', () => {
+  test('Content script implements in-page keyboard event fallback and safe DOM construction', () => {
     const contentCode = fs.readFileSync(path.join(extensionDir, 'content.js'), 'utf8');
     assert.ok(contentCode.includes('SHORTCUT_TRIGGERED'), 'Must message background on shortcut trigger');
     assert.ok(contentCode.includes('KeyR'), 'Must support KeyR for hard reload');
     assert.ok(contentCode.includes('KeyC'), 'Must support KeyC for empty cache');
     assert.ok(contentCode.includes('KeyD'), 'Must support KeyD for purge storage');
+    assert.strictEqual(contentCode.includes('toast.innerHTML'), false, 'toast must not use unescaped innerHTML');
+    assert.ok(contentCode.includes('textContent = title'), 'title must be set safely via textContent');
+  });
+
+  test('Extension stylesheets comply with CSP and offline self-containment (no external @import)', () => {
+    const cssFiles = ['popup.css', 'options.css'];
+    for (const cssFile of cssFiles) {
+      const content = fs.readFileSync(path.join(extensionDir, cssFile), 'utf8');
+      assert.strictEqual(
+        content.includes('@import url('),
+        false,
+        `${cssFile} must not load external fonts/stylesheets via @import url(...)`
+      );
+    }
+  });
+
+  test('Privacy policy documentation exists and details zero-data collection', () => {
+    const privacyPath = path.join(rootDir, 'PRIVACY.md');
+    assert.ok(fs.existsSync(privacyPath), 'PRIVACY.md must exist in root');
+    const privacyContent = fs.readFileSync(privacyPath, 'utf8');
+    assert.ok(privacyContent.includes('Zero Data Collection'), 'Must state zero data collection policy');
+    assert.ok(privacyContent.includes('browsingData'), 'Must document browsingData permission');
+    assert.ok(privacyContent.includes('cookies'), 'Must document cookies permission');
   });
 
   test('All required PNG icons exist and have valid PNG signatures', () => {

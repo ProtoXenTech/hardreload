@@ -73,13 +73,23 @@
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     `;
 
-    toast.innerHTML = `
-      <div style="width: 8px; height: 8px; border-radius: 9999px; background: #10b981; flex-shrink: 0;"></div>
-      <div>
-        <div style="font-weight: 600; color: #ffffff;">${title}</div>
-        ${detail ? `<div style="font-size: 11px; color: #a1a1aa;">${detail}</div>` : ''}
-      </div>
-    `;
+    const indicator = document.createElement('div');
+    indicator.style.cssText = 'width: 8px; height: 8px; border-radius: 9999px; background: #10b981; flex-shrink: 0;';
+
+    const textWrap = document.createElement('div');
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-weight: 600; color: #ffffff;';
+    titleEl.textContent = title;
+    textWrap.appendChild(titleEl);
+
+    if (detail) {
+      const detailEl = document.createElement('div');
+      detailEl.style.cssText = 'font-size: 11px; color: #a1a1aa;';
+      detailEl.textContent = detail;
+      textWrap.appendChild(detailEl);
+    }
+
+    toast.replaceChildren(indicator, textWrap);
 
     document.body.appendChild(toast);
 
