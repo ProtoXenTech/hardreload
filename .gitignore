@@ -46,7 +46,7 @@ Thumbs.db
 .ddev/nginx_full/seconddocroot.conf.example
 
 # Office PM Cache
-_office/.office-cache.json
+office/.office-cache.json
 
 # Logs & temporary files
 *.log
