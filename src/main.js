@@ -422,6 +422,72 @@ document.addEventListener('DOMContentLoaded', () => {
     setHudStatus('NUCLEAR RESET: 32ms');
   });
 
+  // Global Keyboard Shortcuts for Interactive HUD Simulator
+  window.addEventListener('keydown', (e) => {
+    // Only capture Alt+Shift without Ctrl/Meta
+    if (!e.altKey || !e.shiftKey || e.ctrlKey || e.metaKey) return;
+
+    // Ignore if typing inside form inputs or editable elements
+    const tag = e.target?.tagName?.toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target?.isContentEditable) return;
+
+    const code = e.code;
+    let handled = false;
+
+    if (code === 'KeyR') {
+      e.preventDefault();
+      handled = true;
+      const btn = document.getElementById('sim-btn-hard');
+      if (btn) {
+        btn.classList.add('ring-2', 'ring-indigo-500');
+        setTimeout(() => btn.classList.remove('ring-2', 'ring-indigo-500'), 400);
+      }
+      probeCachedAsset(false);
+      setHudStatus('HARD RELOAD: 12ms');
+    } else if (code === 'KeyC') {
+      e.preventDefault();
+      handled = true;
+      const btn = document.getElementById('sim-btn-cache');
+      if (btn) {
+        btn.classList.add('ring-2', 'ring-cyan-500');
+        setTimeout(() => btn.classList.remove('ring-2', 'ring-cyan-500'), 400);
+      }
+      probeCachedAsset(true);
+      setHudStatus('CACHE CLEARED: 18ms');
+    } else if (code === 'KeyD') {
+      e.preventDefault();
+      handled = true;
+      const btn = document.getElementById('sim-btn-storage');
+      if (btn) {
+        btn.classList.add('ring-2', 'ring-purple-500');
+        setTimeout(() => btn.classList.remove('ring-2', 'ring-purple-500'), 400);
+      }
+      wipeLocalStorage();
+      wipeSessionStorage();
+      wipeIndexedDB();
+      unregisterServiceWorker();
+      setHudStatus('STORAGE PURGED: 24ms');
+    } else if (code === 'KeyK') {
+      e.preventDefault();
+      handled = true;
+      setHudStatus('CACHE KILLER TOGGLED');
+    } else if (code === 'KeyN' || code === 'KeyW' || code === 'KeyX') {
+      e.preventDefault();
+      handled = true;
+      const btn = document.getElementById('sim-btn-nuclear');
+      if (btn) {
+        btn.classList.add('ring-2', 'ring-red-500');
+        setTimeout(() => btn.classList.remove('ring-2', 'ring-red-500'), 400);
+      }
+      clearAll();
+      setHudStatus('NUCLEAR RESET: 32ms');
+    }
+
+    if (handled) {
+      console.log(`[HardReload+ HUD] Executed shortcut ${e.code}`);
+    }
+  });
+
   // Storage listener for cross-tab or extension wiping detection
   window.addEventListener('storage', () => {
     updateLocalStorageView();

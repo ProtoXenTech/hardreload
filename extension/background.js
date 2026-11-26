@@ -94,11 +94,44 @@ function setupContextMenus() {
   });
 }
 
+// Helper: Get active tab reliably in MV3 Service Worker
+async function getActiveTab() {
+  try {
+    let [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    if (tab) return tab;
+    [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab) return tab;
+    const allActive = await chrome.tabs.query({ active: true });
+    return allActive[0] || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Unified Command Execution (for chrome.commands and in-page shortcuts)
+async function executeCommand(command, tab) {
+  if (!tab || !tab.id || !tab.url || tab.url.startsWith('chrome://')) return null;
+
+  const urlObj = new URL(tab.url);
+
+  switch (command) {
+    case 'hard-reload-tab':
+      return await performHardReload(tab.id);
+    case 'empty-cache-reload':
+      return await performEmptyCacheReload(tab.id, urlObj.origin);
+    case 'purge-storage-reload':
+      return await performPurgeStorageReload(tab.id, urlObj.origin);
+    case 'toggle-cache-killer':
+      return await toggleCacheKiller(tab.id, urlObj.hostname);
+    default:
+      return null;
+  }
+}
+
 // Context Menu Click Handler
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab && info.menuItemId !== 'open_options') {
-    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    tab = activeTab;
+    tab = await getActiveTab();
   }
 
   if (info.menuItemId === 'open_options') {
@@ -135,24 +168,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
 // Keyboard Commands Handler
 chrome.commands.onCommand.addListener(async (command) => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab || !tab.id || !tab.url || tab.url.startsWith('chrome://')) return;
-
-  const urlObj = new URL(tab.url);
-
-  switch (command) {
-    case 'hard-reload-tab':
-      await performHardReload(tab.id);
-      break;
-    case 'empty-cache-reload':
-      await performEmptyCacheReload(tab.id, urlObj.origin);
-      break;
-    case 'purge-storage-reload':
-      await performPurgeStorageReload(tab.id, urlObj.origin);
-      break;
-    case 'toggle-cache-killer':
-      await toggleCacheKiller(tab.id, urlObj.hostname);
-      break;
+  const tab = await getActiveTab();
+  if (tab) {
+    await executeCommand(command, tab);
   }
 });
 
@@ -194,9 +212,27 @@ async function updateBadgeForTab(tabId) {
   }
 }
 
+// In-page toast feedback helper
+async function showInPageToast(tabId, title, detail) {
+  try {
+    const data = await chrome.storage.sync.get('settings');
+    const toastNotice = data?.settings?.toastNotice !== false;
+    if (toastNotice) {
+      await chrome.tabs.sendMessage(tabId, {
+        type: 'SHOW_PURGE_TOAST',
+        title,
+        detail,
+      });
+    }
+  } catch (e) {
+    // Tab might be chrome:// or content script not ready
+  }
+}
+
 // 1. Hard Reload Tab
 async function performHardReload(tabId) {
   flashBadge(tabId, 'RELOAD', '#4f46e5');
+  showInPageToast(tabId, 'Hard Reload', 'Bypassed memory and disk HTTP cache');
   await chrome.tabs.reload(tabId, { bypassCache: true });
   return { success: true, action: 'hard' };
 }
@@ -204,6 +240,7 @@ async function performHardReload(tabId) {
 // 2. Empty Cache & Reload (Strictly scoped to active origin, never global)
 async function performEmptyCacheReload(tabId, origin) {
   flashBadge(tabId, 'CACHE', '#06b6d4');
+  showInPageToast(tabId, 'Cache Cleared', `Origin cache purged: ${origin || 'active domain'}`);
 
   try {
     // Clear browsing cache & storage scoped strictly to this specific origin
@@ -218,6 +255,9 @@ async function performEmptyCacheReload(tabId, origin) {
   }
 
   // Force byte-level cache bypass for this active tab only
+  await chrome.tabs.reload(tabId, { bypassCache: true });
+  return { success: true, action: 'cache' };
+}
   await chrome.tabs.reload(tabId, { bypassCache: true });
   return { success: true, action: 'cache' };
 }
@@ -433,6 +473,12 @@ async function toggleCacheKiller(tabId, hostname) {
   settings.cacheKillerDomains = Array.from(list);
   await chrome.storage.sync.set({ settings });
 
+  showInPageToast(
+    tabId,
+    enabled ? 'Cache Killer Active' : 'Cache Killer Disabled',
+    `${hostname} will ${enabled ? 'bypass all caching headers' : 'use normal caching'}`
+  );
+
   updateBadgeForTab(tabId);
   return { enabled, hostname };
 }
@@ -510,6 +556,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (action === 'cookies') return await performClearCookiesReload(tabId, url);
         if (action === 'nuclear') return await performNuclearPurge(tabId, origin, url);
         break;
+      }
+
+      case 'SHORTCUT_TRIGGERED': {
+        const targetTab = sender?.tab || (await getActiveTab());
+        if (targetTab) {
+          const res = await executeCommand(message.command, targetTab);
+          return res || { success: true };
+        }
+        return { error: 'No active tab found' };
       }
 
       case 'TOGGLE_CACHE_KILLER': {

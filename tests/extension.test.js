@@ -48,12 +48,37 @@ describe('HardReload+ (hard-reload-plus) Extension Validation', () => {
     assert.strictEqual(manifest.options_ui.page, 'options.html');
   });
 
-  test('Global keyboard commands registered', () => {
+  test('Content scripts configured for in-page diagnostics and shortcut support', () => {
+    assert.ok(Array.isArray(manifest.content_scripts), 'content_scripts must be an array');
+    assert.strictEqual(manifest.content_scripts.length, 1);
+    assert.ok(manifest.content_scripts[0].matches.includes('<all_urls>'));
+    assert.ok(manifest.content_scripts[0].js.includes('content.js'));
+  });
+
+  test('Global keyboard commands registered with valid shortcuts', () => {
     const commands = manifest.commands;
     assert.ok(commands['hard-reload-tab'], 'Must register hard-reload-tab');
+    assert.strictEqual(commands['hard-reload-tab'].suggested_key.default, 'Alt+Shift+R');
     assert.ok(commands['empty-cache-reload'], 'Must register empty-cache-reload');
+    assert.strictEqual(commands['empty-cache-reload'].suggested_key.default, 'Alt+Shift+C');
     assert.ok(commands['purge-storage-reload'], 'Must register purge-storage-reload');
+    assert.strictEqual(commands['purge-storage-reload'].suggested_key.default, 'Alt+Shift+D');
     assert.ok(commands['toggle-cache-killer'], 'Must register toggle-cache-killer');
+    assert.strictEqual(commands['toggle-cache-killer'].suggested_key.default, 'Alt+Shift+K');
+  });
+
+  test('Background service worker implements robust tab querying for shortcuts', () => {
+    const bgCode = fs.readFileSync(path.join(extensionDir, 'background.js'), 'utf8');
+    assert.ok(bgCode.includes('lastFocusedWindow: true'), 'Must query lastFocusedWindow for MV3 command support');
+    assert.ok(bgCode.includes('SHORTCUT_TRIGGERED'), 'Must handle in-page shortcut triggers');
+  });
+
+  test('Content script implements in-page keyboard event fallback', () => {
+    const contentCode = fs.readFileSync(path.join(extensionDir, 'content.js'), 'utf8');
+    assert.ok(contentCode.includes('SHORTCUT_TRIGGERED'), 'Must message background on shortcut trigger');
+    assert.ok(contentCode.includes('KeyR'), 'Must support KeyR for hard reload');
+    assert.ok(contentCode.includes('KeyC'), 'Must support KeyC for empty cache');
+    assert.ok(contentCode.includes('KeyD'), 'Must support KeyD for purge storage');
   });
 
   test('All required PNG icons exist and have valid PNG signatures', () => {

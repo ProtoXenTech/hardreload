@@ -265,6 +265,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     chrome.tabs.create({ url: 'https://hardreload.ddev.site' });
   });
 
+  document.getElementById('btn-configure-shortcuts')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+  });
+
   document.querySelectorAll('#link-protoxen, #link-protoxen-web').forEach((el) => {
     el.addEventListener('click', (e) => {
       e.preventDefault();

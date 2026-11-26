@@ -94,4 +94,36 @@
       setTimeout(() => toast.remove(), 300);
     }, 2200);
   }
+
+  // Listen for in-page keyboard shortcuts as reliable fallback
+  window.addEventListener('keydown', (e) => {
+    // Only capture Alt+Shift without Ctrl or Meta
+    if (!e.altKey || !e.shiftKey || e.ctrlKey || e.metaKey) return;
+
+    // Do not trigger if typing in form inputs or editable content
+    const target = e.target;
+    if (target) {
+      const tag = target.tagName ? target.tagName.toLowerCase() : '';
+      if (tag === 'input' || tag === 'textarea' || tag === 'select' || target.isContentEditable) {
+        return;
+      }
+    }
+
+    let cmd = null;
+    if (e.code === 'KeyR') {
+      cmd = 'hard-reload-tab';
+    } else if (e.code === 'KeyC') {
+      cmd = 'empty-cache-reload';
+    } else if (e.code === 'KeyD') {
+      cmd = 'purge-storage-reload';
+    } else if (e.code === 'KeyK') {
+      cmd = 'toggle-cache-killer';
+    }
+
+    if (cmd) {
+      e.preventDefault();
+      e.stopPropagation();
+      chrome.runtime.sendMessage({ type: 'SHORTCUT_TRIGGERED', command: cmd });
+    }
+  }, true);
 })();
